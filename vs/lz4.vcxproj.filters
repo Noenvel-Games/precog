@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="images">
+      <UniqueIdentifier>A79BF9BE-B8F7-FB6A-7087-5111D4E545A3FD</UniqueIdentifier>
+    </Filter>
+    <Filter Include="defs">
+      <UniqueIdentifier>9EAA5AB8-4C80-F743-3CED-EAD9BBEC9340A8</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>F9BDDFAE-EE9C-697D-DBFA-A7F81BCDAFF288</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\lz4\src\lz4.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\lz4\src\lz4frame.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\lz4\src\lz4hc.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\lz4\src\xxhash.c">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
