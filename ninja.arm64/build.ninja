@@ -276,12 +276,6 @@ build .intermediate/precog/std.cpp.o: CXX_PRECOG ../src/console/precog/src/std.c
   TARGET_COMPILE_PDB = .intermediate/precog
   TARGET_PDB = .intermediate/precog.pdb
 
-build .intermediate/precog/qmake.cpp.o: CXX_PRECOG ../src/console/precog/src/qmake.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
 build .intermediate/precog/main.cpp.o: CXX_PRECOG ../src/console/precog/src/main.cpp
   OBJECT_DIR = .intermediate/precog
   OBJECT_FILE_DIR = .intermediate/precog
@@ -562,7 +556,7 @@ default .output/liblz4.a
 # Applications
 #-------------------------------------------------------------------------------
 
-build .output/precog: ELF_LINKER_PRECOG .intermediate/precog/generator.cpp.o .intermediate/precog/ws.cpp.o .intermediate/precog/ninja.cpp.o .intermediate/precog/ndk.cpp.o .intermediate/precog/luacore.cpp.o .intermediate/precog/xcode.cpp.o .intermediate/precog/msvc.cpp.o .intermediate/precog/stdafx.cpp.o .intermediate/precog/std.cpp.o .intermediate/precog/qmake.cpp.o .intermediate/precog/main.cpp.o
+build .output/precog: ELF_LINKER_PRECOG .intermediate/precog/generator.cpp.o .intermediate/precog/ws.cpp.o .intermediate/precog/ninja.cpp.o .intermediate/precog/ndk.cpp.o .intermediate/precog/luacore.cpp.o .intermediate/precog/xcode.cpp.o .intermediate/precog/msvc.cpp.o .intermediate/precog/stdafx.cpp.o .intermediate/precog/std.cpp.o .intermediate/precog/main.cpp.o
   LINK_LIBRARIES = .output/libstartup.a .output/liblua.a .output/libgfc.a .output/libpal.a .output/liblz4.a
   TARGET_FILE = .output/precog
   OBJECT_DIR = .intermediate/precog
