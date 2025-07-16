@@ -220,20 +220,29 @@ using namespace fs;
     //serializeCrossPlatformRules:{               |
 
       void Workspace::Ninja::serializeCrossPlatformRules( string& cxx )const{
+        if( toLabel().empty() )
+          e_break( "Empty label" );
 
         //----------------------------------------------------------------------
         // Figure out what platform we're on.
         //----------------------------------------------------------------------
 
-        if( toLabel().empty() )
-          e_break( "Empty label" );
         if( bmp->bExtMacho ){
           cxx << "rule MACHO_LINKER_" << toLabel().toupper() + "\n";
-        }else if( bmp->bExtElf ){
+          return;
+        }
+
+        if( bmp->bExtElf ){
           cxx << "rule ELF_LINKER_" << toLabel().toupper() + "\n";
-        }else if( bmp->bExtPE ){
+          return;
+        }
+
+        if( bmp->bExtPE ){
           cxx << "rule PE_LINKER_" << toLabel().toupper() + "\n";
-        }else if( bmp->bCrossCompile ){
+          return;
+        }
+
+        if( bmp->bCrossCompile ){
           if( crossCc.find( "linux" )){
             cxx << "rule ELF_LINKER_" << toLabel().toupper() + "\n";
             return;
@@ -248,6 +257,20 @@ using namespace fs;
           }
           e_break( "Unknown platform: cross compile with option \"-x\"!" );
         }
+
+        //----------------------------------------------------------------------
+        // Determine from compiled platform.
+        //----------------------------------------------------------------------
+
+        #if e_compiling( osx )
+          cxx << "rule MACHO_LINKER_" << toLabel().toupper() + "\n";
+        #elif e_compiling( win64 )
+          cxx << "rule PE_LINKER_" << toLabel().toupper() + "\n";
+        #elif e_compiling( linux )
+          cxx << "rule ELF_LINKER_" << toLabel().toupper() + "\n";
+        #else
+          e_break( "Unknown platform: use cross compiling with option \"-x\"!" );
+        #endif
       }
 
     //}:                                          |
@@ -402,9 +425,9 @@ using namespace fs;
           cxx << " $CXX_FLAGS $" << clabel << " ";
           switch( toLanguage().hash() ){
 
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 						// C++ 23
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 
             case "c++2b"_64:
               cxx << " -std=c++2b";
@@ -418,9 +441,9 @@ using namespace fs;
               cxx << " -std=c++23";
               break;
 
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 						// C++ 20
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 
             case "c++20"_64:
               [[fallthrough]];
@@ -432,9 +455,9 @@ using namespace fs;
               cxx << " -std=c++20";
               break;
 
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 						// C++ 17
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 
             case "c++17"_64:
               [[fallthrough]];
@@ -444,9 +467,9 @@ using namespace fs;
               cxx << " -std=c++17";
               break;
 
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 						// C++ 14
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 
             case "c++14"_64:
               [[fallthrough]];
@@ -456,9 +479,9 @@ using namespace fs;
               cxx << " -std=c++14";
               break;
 
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 						// C++ 11
-						//------------------------------------------------------------------------
+						//------------------------------------------------------------------
 
             case "c++11"_64:
               [[fallthrough]];
@@ -467,10 +490,19 @@ using namespace fs;
             case "cxx11"_64:
               cxx << "-std=c++11";
               break;
-            default:
-              e_break( "Unknown C++ version." );
+            default:/**/{
+              e_break(
+                "Only c++2b\n"
+                "     c++23\n"
+                "     c++20\n"
+                "     c++17\n"
+                "     c++14\n"
+                "     c++11\n"
+              );
+            }
           }
-          cxx << " -lstdc++"
+          cxx // << " -Wunused-command-line-argument"
+              << " -Wvla-cxx-extension"
               << " -o"
               << " $out"
               << " -c"
@@ -624,15 +656,15 @@ using namespace fs;
             }
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm )// TODO: Check different locations with e_fexists.
-                  fs << "~/emsdk/upstream/emscripten/emcc";
+                 fs << "~/emsdk/upstream/emscripten/emcc";
             else fs << "clang";
             if( lstart != lflags )
               fs << " $" << llabel;
             if( bmp->bWasm ){
-              fs << " $in -o ${TARGET_FILE}.html $LINK_LIBRARIES && $POST_BUILD\n";
+              fs << " $in -lstdc++ -o ${TARGET_FILE}.html $LINK_LIBRARIES && $POST_BUILD\n";
               fs << "  description = Linking $out\n";
             }else{
-              fs << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
+              fs << " $in -lstdc++ -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
               if( bmp->bCrossCompile ){
                 if( crossCc.find( "linux" )){
                   fs << "  description = Compiling ELF binary $out\n";

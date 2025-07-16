@@ -29,7 +29,6 @@
   #ifdef __cplusplus
     #if __cplusplus >= 202002L
       #define __compiling_cpp20__ 1
-      #include<type_traits>
     #elif __cplusplus >= 201703L
       #define __compiling_cpp17__ 1
     #elif __cplusplus >= 201500L
