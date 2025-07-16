@@ -502,7 +502,7 @@ using namespace fs;
             }
           }
           cxx // << " -Wunused-command-line-argument"
-              << " -Wvla-cxx-extension"
+              << " -Wvla-extension"
               << " -o"
               << " $out"
               << " -c"
