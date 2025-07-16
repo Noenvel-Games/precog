@@ -342,8 +342,8 @@
             return a;
           #else
             return Affine2(
-              XX-b.XX, YX-b.YX, ZX-b.ZX, WX-b.XW,
-              XY-b.XY, YY-b.YY, ZY-b.ZY, WY-b.YW );
+              XX-b.XX, YX-b.YX, ZX-b.ZX, WX-b.WX,
+              XY-b.XY, YY-b.YY, ZY-b.ZY, WY-b.WY );
           #endif
         }
 

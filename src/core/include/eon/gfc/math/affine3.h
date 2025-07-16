@@ -410,9 +410,9 @@
             return a;
           #else
             return Affine3(
-              XX-b.XX, YX-b.YX, ZX-b.ZX, WX-b.XW,
-              XY-b.XY, YY-b.YY, ZY-b.ZY, WY-b.YW,
-              XZ-b.XZ, YZ-b.YZ, ZZ-b.ZZ, WZ-b.ZW );
+              XX-b.XX, YX-b.YX, ZX-b.ZX, WX-b.WX,
+              XY-b.XY, YY-b.YY, ZY-b.ZY, WY-b.WY,
+              XZ-b.XZ, YZ-b.YZ, ZZ-b.ZZ, WZ-b.WZ );
           #endif
         }
 
@@ -1087,11 +1087,10 @@
         */
 
       e_forceinline static Affine3 flipYZ(){
-        Affine3 flipYZ;
-        flipYZ.setZero();
-        flipYZ[ 0] = 1.f;
-        flipYZ[ 6] = 1.f;
-        flipYZ[ 9] = 1.f;
+        Affine3 flipYZ( 0.f );
+        flipYZ[0]=1.f;
+        flipYZ[6]=1.f;
+        flipYZ[9]=1.f;
         return flipYZ;
       }
 

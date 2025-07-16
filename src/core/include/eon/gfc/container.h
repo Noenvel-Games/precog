@@ -7909,7 +7909,7 @@ namespace gfc{
           {}
 
           e_forceinline const_iterator( const array& outer )
-            : cit( outer.begin() )
+            : cit( outer.m_aArray.begin() )
             , m_tGuard( &outer.m_tLock, true )
             , m_pOuter( &outer )
           {}
