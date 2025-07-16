@@ -504,9 +504,7 @@ using namespace fs;
           cxx // << " -Wunused-command-line-argument"
               << " -Wvla-extension"
               << " -lstdc++"
-              #if e_compiling( linux )
-                << " -lm"
-              #endif
+              << " -lm"
               << " -o"
               << " $out"
               << " -c"
@@ -665,17 +663,14 @@ using namespace fs;
             if( lstart != lflags )
               fs << " $" << llabel;
             if( bmp->bWasm ){
-              fs << " $in "
-              #if e_compiling( linux )
+              fs << " $in"
                  << " -lm"
-              #endif
-                 << "-lstdc++ -o ${TARGET_FILE}.html $LINK_LIBRARIES && $POST_BUILD\n";
+                 << " -lstdc++ -o ${TARGET_FILE}.html $LINK_LIBRARIES &&"
+                 << " $POST_BUILD\n";
               fs << "  description = Linking $out\n";
             }else{
-              fs << " -lstdc++"
-              #if e_compiling( linux )
-                 << " -lm"
-              #endif
+              fs << " -lm"
+                 << " -lstdc++"
                  << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
               if( bmp->bCrossCompile ){
                 if( crossCc.find( "linux" )){
