@@ -2746,21 +2746,14 @@ sk:       readPropertyMap(
           // First of all check that the tags match.
           //--------------------------------------------------------------------
 
-          if( useTracing ){
+          if( useTracing )
             e_msgf( "Loading: %s (%s)", ccp( m_sName ), ccp( tag ));
-          }
-          #if !e_compiling( clang )
-            char* aLabel = new char[ tag.len()+1 ];
-          #else
-            char aLabel[ tag.len()+1 ];
-          #endif
+          char* aLabel = new char[ tag.len()+1 ];
           aLabel[ tag.len() ] = 0;
           fread( aLabel, tag.len(), 1, pFile );
           const bool isMatch=( tag == aLabel );
           const string stag = aLabel;
-          #if !e_compiling( clang )
-            delete[] aLabel;
-          #endif
+          delete[] aLabel;
           if( !isMatch ){
             if( useTracing ){
               e_msgf(

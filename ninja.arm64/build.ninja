@@ -7,112 +7,12 @@
 
 ninja_required_version = 1.11.1
 
-include pal.rules
-include precog.rules
 include lua.rules
+include pal.rules
 include gfc.rules
+include precog.rules
 include lz4.rules
 include startup.rules
-
-#-------------------------------------------------------------------------------
-# Project "pal"
-#-------------------------------------------------------------------------------
-
-build .intermediate/pal/log.cpp.o: CXX_PAL ../src/pal/src/linux/log.cpp
-  OBJECT_DIR = .intermediate/pal
-  OBJECT_FILE_DIR = .intermediate/pal
-  TARGET_COMPILE_PDB = .intermediate/pal
-  TARGET_PDB = .intermediate/pal.pdb
-
-build .intermediate/pal/glue.cpp.o: CXX_PAL ../src/pal/src/linux/glue.cpp
-  OBJECT_DIR = .intermediate/pal
-  OBJECT_FILE_DIR = .intermediate/pal
-  TARGET_COMPILE_PDB = .intermediate/pal
-  TARGET_PDB = .intermediate/pal.pdb
-
-build .intermediate/pal/detect.cpp.o: CXX_PAL ../src/pal/src/linux/detect.cpp
-  OBJECT_DIR = .intermediate/pal
-  OBJECT_FILE_DIR = .intermediate/pal
-  TARGET_COMPILE_PDB = .intermediate/pal
-  TARGET_PDB = .intermediate/pal.pdb
-
-build .intermediate/pal/time.cpp.o: CXX_PAL ../src/pal/src/linux/time.cpp
-  OBJECT_DIR = .intermediate/pal
-  OBJECT_FILE_DIR = .intermediate/pal
-  TARGET_COMPILE_PDB = .intermediate/pal
-  TARGET_PDB = .intermediate/pal.pdb
-
-build .output/libpal.a: STATIC_LIB_PAL .intermediate/pal/log.cpp.o .intermediate/pal/glue.cpp.o .intermediate/pal/detect.cpp.o .intermediate/pal/time.cpp.o
-  OBJECT_DIR = .output
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = .output/libpal.a
-  TARGET_PDB = pal.a.dbg
-default .output/libpal.a
-
-#-------------------------------------------------------------------------------
-# Project "precog"
-#-------------------------------------------------------------------------------
-
-build .intermediate/precog/generator.cpp.o: CXX_PRECOG ../src/console/precog/src/generator.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/ws.cpp.o: CXX_PRECOG ../src/console/precog/src/ws.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/ninja.cpp.o: CXX_PRECOG ../src/console/precog/src/ninja.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/ndk.cpp.o: CXX_PRECOG ../src/console/precog/src/ndk.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/luacore.cpp.o: CXX_PRECOG ../src/console/precog/src/luacore.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/xcode.cpp.o: CXX_PRECOG ../src/console/precog/src/xcode.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/msvc.cpp.o: CXX_PRECOG ../src/console/precog/src/msvc.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/stdafx.cpp.o: CXX_PRECOG ../src/console/precog/src/stdafx.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/std.cpp.o: CXX_PRECOG ../src/console/precog/src/std.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
-
-build .intermediate/precog/main.cpp.o: CXX_PRECOG ../src/console/precog/src/main.cpp
-  OBJECT_DIR = .intermediate/precog
-  OBJECT_FILE_DIR = .intermediate/precog
-  TARGET_COMPILE_PDB = .intermediate/precog
-  TARGET_PDB = .intermediate/precog.pdb
 
 #-------------------------------------------------------------------------------
 # Project "lua"
@@ -319,6 +219,42 @@ build .output/liblua.a: STATIC_LIB_LUA .intermediate/lua/lauxlib.c.o .intermedia
 default .output/liblua.a
 
 #-------------------------------------------------------------------------------
+# Project "pal"
+#-------------------------------------------------------------------------------
+
+build .intermediate/pal/log.cpp.o: CXX_PAL ../src/pal/src/linux/log.cpp
+  OBJECT_DIR = .intermediate/pal
+  OBJECT_FILE_DIR = .intermediate/pal
+  TARGET_COMPILE_PDB = .intermediate/pal
+  TARGET_PDB = .intermediate/pal.pdb
+
+build .intermediate/pal/glue.cpp.o: CXX_PAL ../src/pal/src/linux/glue.cpp
+  OBJECT_DIR = .intermediate/pal
+  OBJECT_FILE_DIR = .intermediate/pal
+  TARGET_COMPILE_PDB = .intermediate/pal
+  TARGET_PDB = .intermediate/pal.pdb
+
+build .intermediate/pal/detect.cpp.o: CXX_PAL ../src/pal/src/linux/detect.cpp
+  OBJECT_DIR = .intermediate/pal
+  OBJECT_FILE_DIR = .intermediate/pal
+  TARGET_COMPILE_PDB = .intermediate/pal
+  TARGET_PDB = .intermediate/pal.pdb
+
+build .intermediate/pal/time.cpp.o: CXX_PAL ../src/pal/src/linux/time.cpp
+  OBJECT_DIR = .intermediate/pal
+  OBJECT_FILE_DIR = .intermediate/pal
+  TARGET_COMPILE_PDB = .intermediate/pal
+  TARGET_PDB = .intermediate/pal.pdb
+
+build .output/libpal.a: STATIC_LIB_PAL .intermediate/pal/log.cpp.o .intermediate/pal/glue.cpp.o .intermediate/pal/detect.cpp.o .intermediate/pal/time.cpp.o
+  OBJECT_DIR = .output
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = .output/libpal.a
+  TARGET_PDB = pal.a.dbg
+default .output/libpal.a
+
+#-------------------------------------------------------------------------------
 # Project "gfc"
 #-------------------------------------------------------------------------------
 
@@ -491,6 +427,70 @@ build .output/libgfc.a: STATIC_LIB_GFC .intermediate/gfc/boot.cpp.o .intermediat
   TARGET_FILE = .output/libgfc.a
   TARGET_PDB = gfc.a.dbg
 default .output/libgfc.a
+
+#-------------------------------------------------------------------------------
+# Project "precog"
+#-------------------------------------------------------------------------------
+
+build .intermediate/precog/generator.cpp.o: CXX_PRECOG ../src/console/precog/src/generator.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/ws.cpp.o: CXX_PRECOG ../src/console/precog/src/ws.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/ninja.cpp.o: CXX_PRECOG ../src/console/precog/src/ninja.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/ndk.cpp.o: CXX_PRECOG ../src/console/precog/src/ndk.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/luacore.cpp.o: CXX_PRECOG ../src/console/precog/src/luacore.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/xcode.cpp.o: CXX_PRECOG ../src/console/precog/src/xcode.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/msvc.cpp.o: CXX_PRECOG ../src/console/precog/src/msvc.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/stdafx.cpp.o: CXX_PRECOG ../src/console/precog/src/stdafx.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/std.cpp.o: CXX_PRECOG ../src/console/precog/src/std.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
+
+build .intermediate/precog/main.cpp.o: CXX_PRECOG ../src/console/precog/src/main.cpp
+  OBJECT_DIR = .intermediate/precog
+  OBJECT_FILE_DIR = .intermediate/precog
+  TARGET_COMPILE_PDB = .intermediate/precog
+  TARGET_PDB = .intermediate/precog.pdb
 
 #-------------------------------------------------------------------------------
 # Project "lz4"
