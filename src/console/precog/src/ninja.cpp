@@ -502,14 +502,14 @@ using namespace fs;
             }
           }
           cxx // << " -Wunused-command-line-argument"
-              << " -Wvla-extension"
-              << " -lstdc++"
-              << " -ldl"
-              << " -lm"
-              << " -o"
-              << " $out"
-              << " -c"
-              << " $in\n";
+            << " -Wvla-extension"
+            << " -lstdc++"
+            << " -lm"
+            << " -o"
+            << " $out"
+            << " -c"
+            << " $in\n"
+          ;
         }
 
         //----------------------------------------------------------------------
@@ -634,7 +634,13 @@ using namespace fs;
                 fs << lflags << " ";
               }
             }
-            fs << " -lstdc++ $in -o $out && $POST_BUILD\n";
+            fs << " -lstdc++"
+            #if e_compiling( linux )
+               << " -Wunused-command-line-argument"
+               << " -ldl"
+               << " -lm"
+            #endif
+               << " $in -o $out && $POST_BUILD\n";
             if( bmp->bWasm )
                  fs << "  description = Linking shared (WASM) library $out\n";
             else fs << "  description = Linking shared library $out\n";
@@ -665,15 +671,17 @@ using namespace fs;
               fs << " $" << llabel;
             if( bmp->bWasm ){
               fs << " $in"
-                 << " -ldl"
                  << " -lm"
                  << " -lstdc++ -o ${TARGET_FILE}.html $LINK_LIBRARIES &&"
                  << " $POST_BUILD\n";
               fs << "  description = Linking $out\n";
             }else{
-              fs << " -ldl"
+              fs << " -lstdc++"
+              #if e_compiling( linux )
+                 << " -Wunused-command-line-argument"
+                 << " -ldl"
                  << " -lm"
-                 << " -lstdc++"
+              #endif
                  << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
               if( bmp->bCrossCompile ){
                 if( crossCc.find( "linux" )){
