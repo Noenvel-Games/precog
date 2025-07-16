@@ -401,6 +401,9 @@ using namespace fs;
           }
           cxx << " $CXX_FLAGS $" << clabel << " ";
           switch( toLanguage().hash() ){
+            case "c++2b"_64:
+              cxx << " -std=c++2b";
+              break;
             case "c++23"_64:
               [[fallthrough]];
             case "cpp23"_64:
@@ -438,7 +441,7 @@ using namespace fs;
               cxx << "-std=c++11";
               break;
             default:
-              e_break( "C++11 is the minimum version." );
+              e_break( "Unknown C++ version." );
           }
           cxx << " -lstdc++"
               << " -o"

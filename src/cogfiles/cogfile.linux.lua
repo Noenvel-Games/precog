@@ -21,7 +21,7 @@ wsp:new'startup'
   : prefix'src/core/include/eon/eon.h'
   : find_sources'src/bootseq/start'
   : target'static'
-  : lang'c++20'
+  : lang'c++17'
 
 --------------------------------------------------------------------------------
 -- Setup the build settings for lz4.
@@ -32,7 +32,7 @@ wsp:new'lz4'
   : set_include_paths'src/lz4/include'
   : find_sources'src/lz4/src'
   : target'static'
-  : lang'c++20'
+  : lang'c++17'
 
 --------------------------------------------------------------------------------
 -- Setup the build settings for lua.
@@ -44,7 +44,7 @@ wsp:new'lua'
   : find_sources'src/lua/5.4.4/src'
   : ignore'lua.c,luac.c'
   : target'static'
-  : lang'c++20'
+  : lang'c++17'
 
 --------------------------------------------------------------------------------
 -- Setup the build settings for gfc.
@@ -58,7 +58,7 @@ wsp:new'gfc'
   : find_sources'src/core/src,src/core/include'
   : prefix'src/core/include/eon/eon.h'
   : target'static'
-  : lang'c++20'
+  : lang'c++17'
 
 --------------------------------------------------------------------------------
 -- Create new project for the PAL or (P)latform (A)bstration (L)ayer).
@@ -70,7 +70,7 @@ wsp:new'pal'
   : find_sources'src/pal/src/linux,src/pal/include'
   : prefix'src/core/include/eon/eon.h'
   : target'static'
-  : lang'c++20'
+  : lang'c++17'
 
 --------------------------------------------------------------------------------
 -- Generate precog executable wsp.
@@ -94,7 +94,7 @@ wsp:new'precog'
       liblz4.a]]
   : prefix'src/core/include/eon/eon.h'
   : target'console'
-  : lang'c++20'
+  : lang'c++17'
 
 --------------------------------------------------------------------------------
 -- Generate and save all project files.
