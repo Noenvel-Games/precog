@@ -504,7 +504,9 @@ using namespace fs;
           cxx // << " -Wunused-command-line-argument"
               << " -Wvla-extension"
               << " -lstdc++"
-              << " -lm"
+              #if e_compiling( linux )
+                << " -lm"
+              #endif
               << " -o"
               << " $out"
               << " -c"
@@ -663,10 +665,18 @@ using namespace fs;
             if( lstart != lflags )
               fs << " $" << llabel;
             if( bmp->bWasm ){
-              fs << " $in -lm -lstdc++ -o ${TARGET_FILE}.html $LINK_LIBRARIES && $POST_BUILD\n";
+              fs << " $in "
+              #if e_compiling( linux )
+                 << " -lm"
+              #endif
+                 << "-lstdc++ -o ${TARGET_FILE}.html $LINK_LIBRARIES && $POST_BUILD\n";
               fs << "  description = Linking $out\n";
             }else{
-              fs << " -lm -lstdc++ $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
+              fs << " -lstdc++"
+              #if e_compiling( linux )
+                 << " -lm"
+              #endif
+                 << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
               if( bmp->bCrossCompile ){
                 if( crossCc.find( "linux" )){
                   fs << "  description = Compiling ELF binary $out\n";
