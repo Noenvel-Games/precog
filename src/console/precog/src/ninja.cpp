@@ -504,6 +504,7 @@ using namespace fs;
           cxx
          // << " -Wunused-command-line-argument"
         //  << " -Wvla-extension"
+            << " -I/usr/include/c++/12"
             << " -lstdc++"
             << " -o"
             << " $out"
