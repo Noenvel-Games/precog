@@ -504,6 +504,8 @@ using namespace fs;
           cxx // << " -Wunused-command-line-argument"
             << " -Wvla-extension"
             << " -lstdc++"
+            << " -lm"
+            << " -ldl"
             << " -o"
             << " $out"
             << " -c"
@@ -634,8 +636,6 @@ using namespace fs;
               }
             }
             fs << " -lstdc++"
-               << " -Wunused-command-line-argument"
-               << " -ldl"
                << " $in -o $out && $POST_BUILD\n";
             if( bmp->bWasm )
                  fs << "  description = Linking shared (WASM) library $out\n";
