@@ -635,11 +635,9 @@ using namespace fs;
               }
             }
             fs << " -lstdc++"
-            #if e_compiling( linux )
                << " -Wunused-command-line-argument"
                << " -ldl"
                << " -lm"
-            #endif
                << " $in -o $out && $POST_BUILD\n";
             if( bmp->bWasm )
                  fs << "  description = Linking shared (WASM) library $out\n";
@@ -677,11 +675,9 @@ using namespace fs;
               fs << "  description = Linking $out\n";
             }else{
               fs << " -lstdc++"
-              #if e_compiling( linux )
                  << " -Wunused-command-line-argument"
                  << " -ldl"
                  << " -lm"
-              #endif
                  << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
               if( bmp->bCrossCompile ){
                 if( crossCc.find( "linux" )){
