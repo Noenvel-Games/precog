@@ -501,8 +501,9 @@ using namespace fs;
               );
             }
           }
-          cxx // << " -Wunused-command-line-argument"
-            << " -Wvla-extension"
+          cxx
+         // << " -Wunused-command-line-argument"
+        //  << " -Wvla-extension"
             << " -lstdc++"
             << " -o"
             << " $out"

@@ -401,7 +401,7 @@ using namespace gfc;
           _mm_store_ss( &r, _mm_sqrt_ss( _mm_load_ss( &value )));
           return r;
         #else
-          return::sqrtf( value );
+          return std::sqrtf( value );
         #endif
       }
     }
@@ -411,7 +411,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::floor()const{
-        return::floorf( value );
+        return std::floorf( value );
       }
     }
 
@@ -420,7 +420,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::ceil()const{
-        return::ceilf( value );
+        return std::ceilf( value );
       }
     }
 
@@ -439,7 +439,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::exp()const{
-        return::expf( value );
+        return std::expf( value );
       }
     }
 
@@ -448,7 +448,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::pow( const f32& y )const{
-        return::powf( value, y.value );
+        return std::powf( value, y.value );
       }
     }
 
@@ -457,7 +457,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::atan2( const f32& y )const{
-        return::atan2f( value, y.value );
+        return std::atan2f( value, y.value );
       }
     }
 
@@ -466,7 +466,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::atan()const{
-        return::atanf( value );
+        return std::atanf( value );
       }
     }
 
@@ -475,7 +475,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::tan()const{
-        return::tanf( value );
+        return std::tanf( value );
       }
     }
 
@@ -484,7 +484,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::asin()const{
-        return::asinf( value );
+        return std::asinf( value );
       }
     }
 
@@ -493,7 +493,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::sin()const{
-        return::sinf( value );
+        return std::sinf( value );
       }
     }
 
@@ -502,7 +502,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::acos()const{
-        return::acosf( value );
+        return std::acosf( value );
       }
     }
 
@@ -511,7 +511,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::cos()const{
-        return::cosf( value );
+        return std::cosf( value );
       }
     }
 
@@ -520,7 +520,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::mod( const f32& y )const{
-        return::fmodf( value, y.value );
+        return std::fmodf( value, y.value );
       }
     }
 
@@ -529,7 +529,7 @@ using namespace gfc;
 
     namespace EON{
       template<> f32 f32::abs()const{
-        return::fabsf( value );
+        return std::fabsf( value );
       }
     }
 
