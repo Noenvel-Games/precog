@@ -504,7 +504,6 @@ using namespace fs;
           cxx // << " -Wunused-command-line-argument"
             << " -Wvla-extension"
             << " -lstdc++"
-            << " -lm"
             << " -o"
             << " $out"
             << " -c"
@@ -637,7 +636,6 @@ using namespace fs;
             fs << " -lstdc++"
                << " -Wunused-command-line-argument"
                << " -ldl"
-               << " -lm"
                << " $in -o $out && $POST_BUILD\n";
             if( bmp->bWasm )
                  fs << "  description = Linking shared (WASM) library $out\n";
@@ -669,7 +667,6 @@ using namespace fs;
               fs << " $" << llabel;
             if( bmp->bWasm ){
               fs << " $in"
-                 << " -lm"
                  << " -lstdc++ -o ${TARGET_FILE}.html $LINK_LIBRARIES &&"
                  << " $POST_BUILD\n";
               fs << "  description = Linking $out\n";
@@ -677,7 +674,6 @@ using namespace fs;
               fs << " -lstdc++"
                  << " -Wunused-command-line-argument"
                  << " -ldl"
-                 << " -lm"
                  << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
               if( bmp->bCrossCompile ){
                 if( crossCc.find( "linux" )){
