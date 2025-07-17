@@ -492,8 +492,8 @@ using namespace fs;
               break;
             default:/**/{
               e_break(
-                "Only c++2b\n"
-                "     c++23\n"
+                "Only c++23\n"
+                "     c++2b\n"
                 "     c++20\n"
                 "     c++17\n"
                 "     c++14\n"
@@ -504,8 +504,6 @@ using namespace fs;
           cxx // << " -Wunused-command-line-argument"
             << " -Wvla-extension"
             << " -lstdc++"
-            << " -lm"
-            << " -ldl"
             << " -o"
             << " $out"
             << " -c"
@@ -672,8 +670,6 @@ using namespace fs;
               fs << "  description = Linking $out\n";
             }else{
               fs << " -lstdc++"
-                 << " -Wunused-command-line-argument"
-                 << " -ldl"
                  << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
               if( bmp->bCrossCompile ){
                 if( crossCc.find( "linux" )){
