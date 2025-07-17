@@ -9,8 +9,8 @@ ninja_required_version = 1.11.1
 
 include gfc.rules
 include precog.rules
-include pal.rules
 include lz4.rules
+include pal.rules
 include lua.rules
 include startup.rules
 
@@ -253,42 +253,6 @@ build .intermediate/precog/main.cpp.o: CXX_PRECOG ../src/console/precog/src/main
   TARGET_PDB = .intermediate/precog.pdb
 
 #-------------------------------------------------------------------------------
-# Project "pal"
-#-------------------------------------------------------------------------------
-
-build .intermediate/pal/log.cpp.o: CXX_PAL ../src/pal/src/linux/log.cpp
-  OBJECT_DIR = .intermediate/pal
-  OBJECT_FILE_DIR = .intermediate/pal
-  TARGET_COMPILE_PDB = .intermediate/pal
-  TARGET_PDB = .intermediate/pal.pdb
-
-build .intermediate/pal/glue.cpp.o: CXX_PAL ../src/pal/src/linux/glue.cpp
-  OBJECT_DIR = .intermediate/pal
-  OBJECT_FILE_DIR = .intermediate/pal
-  TARGET_COMPILE_PDB = .intermediate/pal
-  TARGET_PDB = .intermediate/pal.pdb
-
-build .intermediate/pal/detect.cpp.o: CXX_PAL ../src/pal/src/linux/detect.cpp
-  OBJECT_DIR = .intermediate/pal
-  OBJECT_FILE_DIR = .intermediate/pal
-  TARGET_COMPILE_PDB = .intermediate/pal
-  TARGET_PDB = .intermediate/pal.pdb
-
-build .intermediate/pal/time.cpp.o: CXX_PAL ../src/pal/src/linux/time.cpp
-  OBJECT_DIR = .intermediate/pal
-  OBJECT_FILE_DIR = .intermediate/pal
-  TARGET_COMPILE_PDB = .intermediate/pal
-  TARGET_PDB = .intermediate/pal.pdb
-
-build .output/libpal.a: STATIC_LIB_PAL .intermediate/pal/log.cpp.o .intermediate/pal/glue.cpp.o .intermediate/pal/detect.cpp.o .intermediate/pal/time.cpp.o
-  OBJECT_DIR = .output
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = .output/libpal.a
-  TARGET_PDB = pal.a.dbg
-default .output/libpal.a
-
-#-------------------------------------------------------------------------------
 # Project "lz4"
 #-------------------------------------------------------------------------------
 
@@ -323,6 +287,42 @@ build .output/liblz4.a: STATIC_LIB_LZ4 .intermediate/lz4/lz4hc.c.o .intermediate
   TARGET_FILE = .output/liblz4.a
   TARGET_PDB = lz4.a.dbg
 default .output/liblz4.a
+
+#-------------------------------------------------------------------------------
+# Project "pal"
+#-------------------------------------------------------------------------------
+
+build .intermediate/pal/log.cpp.o: CXX_PAL ../src/pal/src/linux/log.cpp
+  OBJECT_DIR = .intermediate/pal
+  OBJECT_FILE_DIR = .intermediate/pal
+  TARGET_COMPILE_PDB = .intermediate/pal
+  TARGET_PDB = .intermediate/pal.pdb
+
+build .intermediate/pal/glue.cpp.o: CXX_PAL ../src/pal/src/linux/glue.cpp
+  OBJECT_DIR = .intermediate/pal
+  OBJECT_FILE_DIR = .intermediate/pal
+  TARGET_COMPILE_PDB = .intermediate/pal
+  TARGET_PDB = .intermediate/pal.pdb
+
+build .intermediate/pal/detect.cpp.o: CXX_PAL ../src/pal/src/linux/detect.cpp
+  OBJECT_DIR = .intermediate/pal
+  OBJECT_FILE_DIR = .intermediate/pal
+  TARGET_COMPILE_PDB = .intermediate/pal
+  TARGET_PDB = .intermediate/pal.pdb
+
+build .intermediate/pal/time.cpp.o: CXX_PAL ../src/pal/src/linux/time.cpp
+  OBJECT_DIR = .intermediate/pal
+  OBJECT_FILE_DIR = .intermediate/pal
+  TARGET_COMPILE_PDB = .intermediate/pal
+  TARGET_PDB = .intermediate/pal.pdb
+
+build .output/libpal.a: STATIC_LIB_PAL .intermediate/pal/log.cpp.o .intermediate/pal/glue.cpp.o .intermediate/pal/detect.cpp.o .intermediate/pal/time.cpp.o
+  OBJECT_DIR = .output
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = .output/libpal.a
+  TARGET_PDB = pal.a.dbg
+default .output/libpal.a
 
 #-------------------------------------------------------------------------------
 # Project "lua"
