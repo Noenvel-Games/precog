@@ -1,10 +1,28 @@
-local SYS=`uname -s`
-local SYS=`echo "$SYS" | awk '{print tolower($0)}'`
+SYS=`uname -s`
+SYS=`echo "$SYS" | awk '{print tolower($0)}'`
+
+MEC=`uname -m`
+MEC=`echo "$MEK" | awk '{print tolower($0)}'`
+
 case $SYS in
   darwin)
-    precog ninja -oninja.arm64
+    case $MEC in
+      x86_64)
+        precog ninja=macos "-oninja.$MEC"
+      ;;
+      arm64)
+        precog ninja=macos "-oninja.$MEC"
+      ;;
+    esac
   ;;
   linux)
-    precog ninja -oninja.arm64
+    case $MEC in
+      x86_64)
+        precog ninja=linux "-oninja.$MEC"
+      ;;
+      arm64)
+        precog ninja=linux "-oninja.$MEC"
+      ;;
+    esac
   ;;
 esac
