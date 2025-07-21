@@ -497,17 +497,28 @@ using namespace fs;
               );
             }
           }
-          cxx
-         // << " -Wunused-command-line-argument"
-         // << " -Wvla-extension"
-         // << " -I/usr/include/c++/12"
-            << " -I/usr/include/aarch64-linux-gnu/c++/12"
-            << " -lstdc++"
-            << " -o"
-            << " $out"
-            << " -c"
-            << " $in\n"
-          ;
+
+          //--------------------------------------------------------------------
+          // Final arguments.
+          //--------------------------------------------------------------------
+
+          #if e_compiling( linux )
+            cxx
+              << " -I/usr/include/aarch64-linux-gnu/c++/12"
+              << " -I/usr/include/c++/12"
+              << " -lstdc++"
+              << " -o"
+              << " $out"
+              << " -c"
+              << " $in\n";
+          #else
+            cxx
+              << " -lstdc++"
+              << " -o"
+              << " $out"
+              << " -c"
+              << " $in\n";
+          #endif
         }
 
         //----------------------------------------------------------------------
