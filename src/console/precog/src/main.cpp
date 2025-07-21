@@ -596,8 +596,8 @@ using namespace fs;
         static constexpr u8 major = 0x03; // Major version number [majRelease].
         static constexpr u8 minor = 0x03; // Minor version number [minRelease].
         static constexpr u8 rev   = 0x03; // Revision.
+        static constexpr u8 patch = 0x01; // Patch (bug fixes).
         static constexpr u8 build = 0x00; // Build (Reg bvilds).
-        static constexpr u8 patch = 0x00; // Patch (bug fixes).
 
         //----------------------------------------------------------------------
         // Message out the version.
@@ -608,8 +608,8 @@ using namespace fs;
             , major
             , minor
             , rev );
-        if( build ) title.catf( " b%u", build );
-        if( patch ) title.catf( " p%u", patch );
+        if( patch ) title.catf( " patch %u.", patch );
+        if( build ) title.catf( "%u", build );
         if( args.size() == 1u )
           title << "\n  -? helps";
         e_msg( title );
