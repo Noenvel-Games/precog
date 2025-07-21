@@ -9,5 +9,5 @@ rule C_PRECOG
   description = Building C object $out
 
 rule ELF_LINKER_PRECOG
-  command = $PRE_LINK && clang++ -lstdc++ $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD
+  command = $PRE_LINK && clang++ $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD
   description = Compiling ELF binary $out
