@@ -608,12 +608,8 @@ using namespace fs;
             , major
             , minor
             , rev );
-        if( build )
-          title.catf( " b%u"
-            , build );
-        if( patch )
-          title.catf( " p%u"
-            , patch );
+        if( build ) title.catf( " b%u", build );
+        if( patch ) title.catf( " p%u", patch );
         if( args.size() == 1u )
           title << "\n  -? helps";
         e_msg( title );
