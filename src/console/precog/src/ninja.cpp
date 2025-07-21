@@ -505,7 +505,8 @@ using namespace fs;
           #if e_compiling( linux )
             cxx
               << " -I/usr/include/aarch64-linux-gnu/c++/12"
-              << " -I/usr/include/c++/12"
+              << " -I/usr/include/aarch64-linux-gnu"
+              << " -I/usr/include"
               << " -lstdc++"
               << " -o"
               << " $out"
