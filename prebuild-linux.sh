@@ -18,7 +18,7 @@ case $SYS in
   linux)
     case $MEC in
       x86_64)
-        precog ninja=linux "-oninja.$MEC"
+        precog ninja=linux -oninja.x64
       ;;
       arm64)
         precog ninja=linux "-oninja.$MEC"
