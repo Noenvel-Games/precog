@@ -339,15 +339,11 @@ using namespace fs;
         const auto clabel = toLabel().toupper() + "_CFLAGS";
         const auto cstart = clabel + " = ";
         string cflags = cstart;
-        if( bmp->bWasm ){
-          if( e_getCvar( bool, "ENABLE_PTHREADS" )){
-            cflags << "-O3 -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 -s PROXY_TO_PTHREAD";
-          }else{
-            cflags << "-O3";
-          }
-        }else{
-          cflags << "-O3";
-        }
+        if( bmp->bWasm )
+          if( e_getCvar( bool, "ENABLE_PTHREADS" ))
+               cflags << "-O3 -libc -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 -s PROXY_TO_PTHREAD";
+          else cflags << "-O3 -libc";
+        else   cflags << "-O3 -libc";
         if( !toIncludePaths().empty() ){
           const auto& includePaths = toIncludePaths().splitAtCommas();
           includePaths.foreach(
@@ -419,15 +415,15 @@ using namespace fs;
               e_break( " * Emscripten not found at ~/emsdk." );
               return;
             }
-          }else{
-            cxx << "/usr/bin/clang++";
-          }
+          }else if( e_dexists( "/usr/bin/g++" ))
+               cxx << "/usr/bin/g++";
+          else cxx << "/usr/bin/clang++";
           cxx << " $CXX_FLAGS $" << clabel << " ";
           switch( toLanguage().hash() ){
 
-						//------------------------------------------------------------------
-						// C++ 23
-						//------------------------------------------------------------------
+            //------------------------------------------------------------------
+            // C++ 23
+            //------------------------------------------------------------------
 
             case "c++2b"_64:
               cxx << " -std=c++2b";
@@ -441,9 +437,9 @@ using namespace fs;
               cxx << " -std=c++23";
               break;
 
-						//------------------------------------------------------------------
-						// C++ 20
-						//------------------------------------------------------------------
+            //------------------------------------------------------------------
+            // C++ 20
+            //------------------------------------------------------------------
 
             case "c++20"_64:
               [[fallthrough]];
@@ -455,9 +451,9 @@ using namespace fs;
               cxx << " -std=c++20";
               break;
 
-						//------------------------------------------------------------------
-						// C++ 17
-						//------------------------------------------------------------------
+            //------------------------------------------------------------------
+            // C++ 17
+            //------------------------------------------------------------------
 
             case "c++17"_64:
               [[fallthrough]];
@@ -467,9 +463,9 @@ using namespace fs;
               cxx << " -std=c++17";
               break;
 
-						//------------------------------------------------------------------
-						// C++ 14
-						//------------------------------------------------------------------
+            //------------------------------------------------------------------
+            // C++ 14
+            //------------------------------------------------------------------
 
             case "c++14"_64:
               [[fallthrough]];
@@ -479,9 +475,9 @@ using namespace fs;
               cxx << " -std=c++14";
               break;
 
-						//------------------------------------------------------------------
-						// C++ 11
-						//------------------------------------------------------------------
+            //------------------------------------------------------------------
+            // C++ 11
+            //------------------------------------------------------------------
 
             case "c++11"_64:
               [[fallthrough]];
@@ -629,6 +625,11 @@ using namespace fs;
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm ){// TODO: Search on path first and use e_dexists().
               fs << "~/emsdk/upstream/emscripten/emcc --shared ";
+            }else if( e_dexists( "/usr/bin/g++" )){
+              fs << "g++ --shared ";
+              if( lstart != lflags ){
+                fs << lflags << " ";
+              }
             }else{
               fs << "clang++ --shared ";
               if( lstart != lflags ){
@@ -662,6 +663,8 @@ using namespace fs;
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm )// TODO: Check different locations with e_fexists.
                  fs << "~/emsdk/upstream/emscripten/emcc";
+            else if( e_dexists( "/usr/bin/g++" ))
+                 fs << "g++";// NB: preserve order.
             else fs << "clang++";
             if( lstart != lflags )
               fs << " $" << llabel;
@@ -712,3 +715,4 @@ using namespace fs;
   //}:                                            |
 //}:                                              |
 //================================================+=============================
+//                                                        vim:se nu sw=2 ts=2 et
