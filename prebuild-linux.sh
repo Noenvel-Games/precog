@@ -7,7 +7,7 @@ main(){
     darwin)
       case $MEC in
         x86_64) # Apple Intel Crapola.c
-          precog ninja=macos "-oninja.$MEC"
+          precog ninja=macos "-oninja.x64"
           return
         ;;
         arm64) # Apple Silicon
@@ -19,7 +19,7 @@ main(){
     ;;
     linux)
       case $MEC in
-        x86_64)
+        x86_64) # Intel wicked slow garbage.
           precog ninja=linux -oninja.x64
           return
         ;;
