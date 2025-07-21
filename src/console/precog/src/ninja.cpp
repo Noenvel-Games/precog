@@ -359,6 +359,7 @@ using namespace fs;
             }
           );
         }
+        cflags << " -I/usr/include";
         if( !toDefinesRel().empty() ){
           const auto& defines = toDefinesRel().splitAtCommas();
           defines.foreach(
@@ -503,10 +504,10 @@ using namespace fs;
           //--------------------------------------------------------------------
 
           #if e_compiling( linux )
-            cxx
+            cxx // The first three includes are for ChromeOS.
               << " -I/usr/include/aarch64-linux-gnu/c++/12"
               << " -I/usr/include/aarch64-linux-gnu"
-              << " -I/usr/include"
+              << " -I/usr/include/c++/12"
               << " -lstdc++"
               << " -o"
               << " $out"
