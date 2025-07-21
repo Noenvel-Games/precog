@@ -5,7 +5,7 @@ rule CXX_LUA
   description = Building C++ object $out
 
 rule C_LUA
-  command = clang $LUA_CFLAGS -o $out -c $in
+  command = gcc $LUA_CFLAGS -o $out -c $in
   description = Building C object $out
 
 rule STATIC_LIB_LUA

@@ -5,7 +5,7 @@ rule CXX_LZ4
   description = Building C++ object $out
 
 rule C_LZ4
-  command = clang $LZ4_CFLAGS -o $out -c $in
+  command = gcc $LZ4_CFLAGS -o $out -c $in
   description = Building C object $out
 
 rule STATIC_LIB_LZ4
