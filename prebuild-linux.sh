@@ -7,10 +7,10 @@ MEC=`echo "$MEK" | awk '{print tolower($0)}'`
 case $SYS in
   darwin)
     case $MEC in
-      x86_64)
+      x86_64) # Apple Intel Crapola.c
         precog ninja=macos "-oninja.$MEC"
       ;;
-      arm64)
+      arm64) # Apple Silicon
         precog ninja=macos "-oninja.$MEC"
       ;;
     esac
