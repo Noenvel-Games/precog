@@ -344,9 +344,9 @@ using namespace fs;
                cflags << " -I/usr/include";
         if( bmp->bWasm )
           if( e_getCvar( bool, "ENABLE_PTHREADS" ))
-               cflags << " -O3 -libc -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 -s PROXY_TO_PTHREAD";
-          else cflags << " -O3 -libc";
-        else   cflags << " -O3 -libc";
+               cflags << " -O3 -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 -s PROXY_TO_PTHREAD";
+          else cflags << " -O3";
+        else   cflags << " -O3";
         if( !toIncludePaths().empty() ){
           const auto& includePaths = toIncludePaths().splitAtCommas();
           includePaths.foreach(
