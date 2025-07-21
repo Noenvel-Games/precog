@@ -20,6 +20,9 @@ case $SYS in
       x86_64)
         precog ninja=linux -oninja.x64
       ;;
+      aarch64) # Arm64 but not Apple
+        precog ninja=linux "-oninja.$MEC"
+      ;;
       arm64)
         precog ninja=linux "-oninja.$MEC"
       ;;
