@@ -549,11 +549,9 @@ using namespace fs;
               return;
             }
           }else{
-            #if e_compiling( linux )
-              c << "gcc $" << clabel << " -o $out -c $in\n";
-            #else
-              c << "clang $" << clabel << " -o $out -c $in\n";
-            #endif
+            if( bmp->bCrostini )
+                 c <<   "gcc $" << clabel << " -o $out -c $in\n";
+            else c << "clang $" << clabel << " -o $out -c $in\n";
           }
         }
 
