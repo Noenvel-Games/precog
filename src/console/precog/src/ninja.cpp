@@ -339,11 +339,12 @@ using namespace fs;
         const auto clabel = toLabel().toupper() + "_CFLAGS";
         const auto cstart = clabel + " = ";
         string cflags = cstart;
+               cflags << " -I/usr/include";
         if( bmp->bWasm )
           if( e_getCvar( bool, "ENABLE_PTHREADS" ))
-               cflags << "-O3 -libc -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 -s PROXY_TO_PTHREAD";
-          else cflags << "-O3 -libc";
-        else   cflags << "-O3 -libc";
+               cflags << " -O3 -libc -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 -s PROXY_TO_PTHREAD";
+          else cflags << " -O3 -libc";
+        else   cflags << " -O3 -libc";
         if( !toIncludePaths().empty() ){
           const auto& includePaths = toIncludePaths().splitAtCommas();
           includePaths.foreach(
@@ -359,7 +360,6 @@ using namespace fs;
             }
           );
         }
-        cflags << " -I/usr/include";
         if( !toDefinesRel().empty() ){
           const auto& defines = toDefinesRel().splitAtCommas();
           defines.foreach(
@@ -416,9 +416,12 @@ using namespace fs;
               e_break( " * Emscripten not found at ~/emsdk." );
               return;
             }
-          }else if( e_dexists( "/usr/bin/g++" ))
-               cxx << "/usr/bin/g++";
-          else cxx << "/usr/bin/clang++";
+	  }
+          #if e_compiling( osx )
+            else if( e_dexists( "/usr/bin/clang++" ))
+              cxx << "/usr/bin/clang++";
+          #endif
+          else cxx << "/usr/bin/g++";
           cxx << " $CXX_FLAGS $" << clabel << " ";
           switch( toLanguage().hash() ){
 
@@ -549,7 +552,11 @@ using namespace fs;
               return;
             }
           }else{
-            c << "clang $" << clabel << " -o $out -c $in\n";
+            #if e_compiling( linux )
+              c << "gcc $" << clabel << " -o $out -c $in\n";
+            #else
+              c << "clang $" << clabel << " -o $out -c $in\n";
+            #endif
           }
         }
 
@@ -637,15 +644,17 @@ using namespace fs;
               }
             }
             fs << "  command = $PRE_LINK && ";
-            if( bmp->bWasm ){// TODO: Search on path first and use e_dexists().
+            if( bmp->bWasm )// TODO: Search on path first and use e_dexists().
               fs << "~/emsdk/upstream/emscripten/emcc --shared ";
-            }else if( e_dexists( "/usr/bin/g++" )){
-              fs << "g++ --shared ";
-              if( lstart != lflags ){
-                fs << lflags << " ";
+            #if e_compiling( osx  )
+              }else if( e_dexists( "/usr/bin/clang++" )){
+                fs << "clang++ --shared ";
+                if( lstart != lflags ){
+                  fs << lflags << " ";
+                }
               }
-            }else{
-              fs << "clang++ --shared ";
+            #endif
+            else{ fs << "g++ --shared ";
               if( lstart != lflags ){
                 fs << lflags << " ";
               }
@@ -677,9 +686,11 @@ using namespace fs;
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm )// TODO: Check different locations with e_fexists.
                  fs << "~/emsdk/upstream/emscripten/emcc";
-            else if( e_dexists( "/usr/bin/g++" ))
-                 fs << "g++";// NB: preserve order.
-            else fs << "clang++";
+            #if e_compiling( osx )
+              else if( e_dexists( "/usr/bin/clang++" ))
+                   fs << "clang++";// NB: preserve order.
+            #endif
+            else fs << "g++";
             if( lstart != lflags )
               fs << " $" << llabel;
             if( bmp->bWasm ){
