@@ -52,7 +52,7 @@
         #ifdef __cplusplus
           #define BOOST_BIND_GLOBAL_PLACEHOLDERS
           #include"boost/type_index.hpp"
-          #include"boost/utility.hpp>
+          #include"boost/utility.hpp"
           #include"boost/bind.hpp"
         #endif
 

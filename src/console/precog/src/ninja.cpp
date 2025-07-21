@@ -262,6 +262,20 @@ using namespace fs;
       }
 
     //}:                                          |
+    //extFromSource<>:{                           |
+
+      ccp Workspace::Ninja::extFromEnum( const Type e )const{
+        switch( e ){
+          case decltype( e )::kCpp:
+            return".cpp";
+          case decltype( e )::kC:
+            return".c";
+          default:
+            return"";
+        }
+      }
+
+    //}:                                          |
     //serialize:{                                 |
 
       void Workspace::Ninja::serialize( Writer& fs )const{
