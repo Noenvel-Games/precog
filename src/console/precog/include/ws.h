@@ -788,6 +788,7 @@
           , bNDK:1
           // Special platform hints.
           , osIphone:1
+          , osIpad:1
           , osMac:1
           // Unicode.
           , bUTF16:1
@@ -796,7 +797,10 @@
           , bExtMacho:1
           , bExtElf:1
           , bExtPE:1
-          // Debugging
+          , bCrostini:1
+          , bLinux:1
+          , bMacOS:1
+          // Debugging.
           , bVerbose:1
         );
 

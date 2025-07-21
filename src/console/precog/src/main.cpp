@@ -594,8 +594,8 @@ using namespace fs;
 
         // Each has 256 steps: 0x00 thru 0xFF.
         static constexpr u8 major = 0x03; // Major version number [majRelease].
-        static constexpr u8 minor = 0x02; // Minor version number [minRelease].
-        static constexpr u8 rev   = 0x0A; // Revision.
+        static constexpr u8 minor = 0x03; // Minor version number [minRelease].
+        static constexpr u8 rev   = 0x00; // Revision.
         static constexpr u8 build = 0x00; // Build (Reg bvilds).
         static constexpr u8 patch = 0x00; // Patch (bug fixes).
 
@@ -681,6 +681,20 @@ using namespace fs;
                 continue;
 
               // Handle ninja option except on linux where it is the default.
+              case"ninja=crostini"_64:
+                Workspace::bmp->bCrossCompile = 1;
+                Workspace::bmp->bCrostini     = 1;
+                Workspace::crossCc            = "arm64,elf";
+                Workspace::bmp->bNinja        = 1;
+                break;
+              case"ninja=linux"_64:
+                Workspace::bmp->bLinux = 1;
+                Workspace::bmp->bNinja = 1;
+                break;
+              case"ninja=macos"_64:
+                Workspace::bmp->bMacOS = 1;
+                Workspace::bmp->bNinja = 1;
+                break;
               case"ninja"_64:
                 Workspace::bmp->bNinja = 1;
                 continue;
@@ -886,7 +900,7 @@ using namespace fs;
                   e_msg( "      vs2022{=[v143]}" );
                   e_msg( "      emscripten" );
                   e_msg( "      gradle" );
-                  e_msg( "      ninja" );
+                  e_msg( "      ninja[={crostini|linux|macos}]" );
                   e_msg( "      wasm" );
                   e_msg( "    Compiling:" );
                   e_msg( "      {--cross=|-x}<arch,<sub>,<vendor>,<sys>,<env>" );

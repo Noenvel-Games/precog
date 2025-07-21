@@ -416,11 +416,8 @@ using namespace fs;
               e_break( " * Emscripten not found at ~/emsdk." );
               return;
             }
-	  }
-          #if e_compiling( osx )
-            else if( e_dexists( "/usr/bin/clang++" ))
-              cxx << "/usr/bin/clang++";
-          #endif
+          }else if( !bmp->bCrostini )
+               cxx << "/usr/bin/clang++";
           else cxx << "/usr/bin/g++";
           cxx << " $CXX_FLAGS $" << clabel << " ";
           switch( toLanguage().hash() ){
@@ -644,17 +641,14 @@ using namespace fs;
               }
             }
             fs << "  command = $PRE_LINK && ";
-            if( bmp->bWasm )// TODO: Search on path first and use e_dexists().
+            if( bmp->bWasm )// TODO: Search on path first and use dexists.
               fs << "~/emsdk/upstream/emscripten/emcc --shared ";
-            #if e_compiling( osx  )
-              }else if( e_dexists( "/usr/bin/clang++" )){
-                fs << "clang++ --shared ";
-                if( lstart != lflags ){
-                  fs << lflags << " ";
-                }
-              }
-            #endif
-            else{ fs << "g++ --shared ";
+            else if( !bmp->bCrostini ){
+              fs << "clang++ --shared ";
+              if( lstart != lflags )
+                fs << lflags << " ";
+            }else{ fs << "g++ --shared ";
+              // TODO: g++ has different command line options than clang.
               if( lstart != lflags ){
                 fs << lflags << " ";
               }
@@ -686,10 +680,8 @@ using namespace fs;
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm )// TODO: Check different locations with e_fexists.
                  fs << "~/emsdk/upstream/emscripten/emcc";
-            #if e_compiling( osx )
-              else if( e_dexists( "/usr/bin/clang++" ))
-                   fs << "clang++";// NB: preserve order.
-            #endif
+            else if( !bmp->bCrostini )
+                 fs << "clang++";// NB: preserve order.
             else fs << "g++";
             if( lstart != lflags )
               fs << " $" << llabel;
