@@ -630,7 +630,7 @@ using namespace fs;
             if( bmp->bWasm ){// TODO: Search on path first and use e_dexists().
               fs << "~/emsdk/upstream/emscripten/emcc --shared ";
             }else{
-              fs << "clang --shared ";
+              fs << "clang++ --shared ";
               if( lstart != lflags ){
                 fs << lflags << " ";
               }
@@ -662,7 +662,7 @@ using namespace fs;
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm )// TODO: Check different locations with e_fexists.
                  fs << "~/emsdk/upstream/emscripten/emcc";
-            else fs << "clang";
+            else fs << "clang++";
             if( lstart != lflags )
               fs << " $" << llabel;
             if( bmp->bWasm ){

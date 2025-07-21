@@ -3199,13 +3199,9 @@
               }else{
                 rvalue.query( 0, [&]( const T& t ){
                   m_vVector.resize( n + k );
-                  if( std::is_pod<T>::value ){
-                    memcpy( &m_vVector[ k ], &t, sizeof( T )*n );
-                  }else{
-                    for( u32 i=0; i<n; ++i ){
-                      m_vVector[ k+i ]=rvalue.m_vVector[ i ];
-                    }
-                  }
+									for( u32 i=0; i<n; ++i ){
+										m_vVector[ k+i ]=rvalue.m_vVector[ i ];
+									}
                 });
                 rvalue.m_vVector.clear();
               }
@@ -5131,19 +5127,13 @@
                 });
                 return true;
               }
-              if( v.empty() ){
+              if( v.empty() )
                 return false;
-              }
               e_guardw( m_tLock );
               const u32 n = u32( m_vVector.size() );
               m_vVector.resize( n + n );
-              if( std::is_pod<T>::value ){
-                memcpy( vp( &m_vVector[ n ]), vp( &m_vVector[ 0 ]), sizeof( T )*n );
-              }else{
-                for( u32 i=0; i<n; ++i ){
-                  m_vVector[ n+i ] = m_vVector[ i ];
-                }
-              }
+							for( u32 i=0; i<n; ++i )
+								m_vVector[ n+i ] = m_vVector[ i ];
               return true;
             }
 
@@ -5174,13 +5164,8 @@
               e_guardw( m_tLock );
               const u32 n = u32( m_vVector.size() );
               m_vVector.resize( n + n );
-              if( std::is_pod<T>::value ){
-                memcpy( vp( &m_vVector[ n ]), &m_vVector[ 0 ], sizeof( T )*n );
-              }else{
-                for( u32 i=0; i<n; ++i ){
-                  m_vVector[ n+i ] = m_vVector[ i ];
-                }
-              }
+							for( u32 i=0; i<n; ++i )
+								m_vVector[ n+i ] = m_vVector[ i ];
               return true;
             }
 
@@ -8590,12 +8575,8 @@ namespace gfc{
       : m_aArray( std::move( rvalue.m_aArray ))
     {}
 
+    array() = default;
   ~ array() = default;
-    array(){
-      if( std::is_pod<T>::value ){
-        memset( vp( m_aArray.data() ), 0, sizeof( T )*N );
-      }
-    }
 
   private:
 

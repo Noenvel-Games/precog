@@ -367,13 +367,9 @@
 #define e_var_dim( T, X, N )                                                    \
   public:                                                                       \
     e_forceinline_always void set##X( const T a##X[ u32( N )]){                 \
-      if( std::is_pod<T>() ){                                                   \
-        memcpy( m_a##X, a##X, sizeof( T )*u32( N ));                            \
-      }else{                                                                    \
-        for( u32 i=0; i<u32( N ); ++i ){                                        \
-          m_a##X[ i ]=a##X[ i ];                                                \
-        }                                                                       \
-      }                                                                         \
+			for( u32 i=0; i<u32( N ); ++i ){                                        \
+				m_a##X[ i ]=a##X[ i ];                                                \
+			}                                                                       \
     }                                                                           \
     template<typename E> e_forceinline_always void setIn##X( const E e,         \
         const T& t ){                                                           \
