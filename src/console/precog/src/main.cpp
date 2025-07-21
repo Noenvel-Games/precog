@@ -595,7 +595,7 @@ using namespace fs;
         // Each has 256 steps: 0x00 thru 0xFF.
         static constexpr u8 major = 0x03; // Major version number [majRelease].
         static constexpr u8 minor = 0x03; // Minor version number [minRelease].
-        static constexpr u8 rev   = 0x01; // Revision.
+        static constexpr u8 rev   = 0x03; // Revision.
         static constexpr u8 build = 0x00; // Build (Reg bvilds).
         static constexpr u8 patch = 0x00; // Patch (bug fixes).
 
@@ -680,16 +680,26 @@ using namespace fs;
               case"ninja=crostini"_64:
                 Workspace::bmp->bCrossCompile = 1;
                 Workspace::bmp->bCrostini     = 1;
-                Workspace::crossCc            = "arm64,elf";
+                Workspace::bmp->bLinux        = 1;
                 Workspace::bmp->bNinja        = 1;
-                break;
+                Workspace::crossCc            = "arm64,elf,linux";
+                continue;
               case"ninja=linux"_64:
-                Workspace::bmp->bLinux = 1;
-                Workspace::bmp->bNinja = 1;
-                break;
+                Workspace::bmp->bCrossCompile = 1;
+                Workspace::bmp->bLinux        = 1;
+                Workspace::bmp->bNinja        = 1;
+                Workspace::crossCc            = "arm64,elf,linux";
+                continue;
               case"ninja=macos"_64:
                 Workspace::bmp->bMacOS = 1;
                 Workspace::bmp->bNinja = 1;
+                continue;
+              // TODO: Add translation for MSVC in the Ninja translation unit.
+              case"ninja=win64"_64:
+                Workspace::bmp->bCrossCompile = 1;
+                Workspace::bmp->bWin64        = 1;
+                Workspace::bmp->bNinja        = 1;
+                Workspace::crossCc            = "win64,pe";
                 break;
               case"ninja"_64:
                 Workspace::bmp->bNinja = 1;

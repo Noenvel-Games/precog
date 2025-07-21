@@ -800,6 +800,7 @@
           , bCrostini:1
           , bLinux:1
           , bMacOS:1
+          , bWin64:1
           // Debugging.
           , bVerbose:1
         );

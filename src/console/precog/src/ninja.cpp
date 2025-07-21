@@ -647,14 +647,13 @@ using namespace fs;
               fs << "clang++ --shared ";
               if( lstart != lflags )
                 fs << lflags << " ";
-            }else{ fs << "g++ --shared ";
-              // TODO: g++ has different command line options than clang.
+            }else{// TODO: g++ and clang differ in command line args.
+              fs << "g++ --shared ";
               if( lstart != lflags ){
                 fs << lflags << " ";
               }
             }
-            fs << " -lstdc++"
-               << " $in -o $out && $POST_BUILD\n";
+            fs << " $in -o $out && $POST_BUILD\n";
             if( bmp->bWasm )
                  fs << "  description = Linking shared (WASM) library $out\n";
             else fs << "  description = Linking shared library $out\n";
@@ -687,12 +686,11 @@ using namespace fs;
               fs << " $" << llabel;
             if( bmp->bWasm ){
               fs << " $in"
-                 << " -lstdc++ -o ${TARGET_FILE}.html $LINK_LIBRARIES &&"
-                 << " $POST_BUILD\n";
-              fs << "  description = Linking $out\n";
+                 << " -o ${TARGET_FILE}.html $LINK_LIBRARIES &&"
+                 << " $POST_BUILD\n"
+                 << "  description = Linking $out\n";
             }else{
-              fs << " -lstdc++"
-                 << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
+              fs << " $in -o $TARGET_FILE $LINK_LIBRARIES && $POST_BUILD\n";
               if( bmp->bCrossCompile ){
                 if( crossCc.find( "linux" )){
                   fs << "  description = Compiling ELF binary $out\n";
@@ -732,4 +730,4 @@ using namespace fs;
   //}:                                            |
 //}:                                              |
 //================================================+=============================
-//                                                        vim:se nu sw=2 ts=2 et
+//                                                 vim:se nowrap nu sw=2 ts=2 et
