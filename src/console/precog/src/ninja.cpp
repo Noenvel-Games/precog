@@ -27,98 +27,86 @@ using namespace fs;
 //}:                                              |
 //Methods:{                                       |
   //[project]:{                                   |
-    //extFromEnum:{                               |
+    //[sorting]:{                                 |
+      //sortingHat:{                              |
 
-      ccp Workspace::Ninja::extFromEnum( const Type e )const{
-        switch( e ){
-          case decltype( e )::kCpp:
-            return".cpp";
-          case decltype( e )::kC:
-            return".c";
-          default:
-            return"";
+        bool Workspace::Ninja::sortingHat( const string& in_path ){
+
+          //--------------------------------------------------------------------
+          // Gather together all the sources and store them off. Ignore them at
+          // the end of the function.
+          //--------------------------------------------------------------------
+
+          File fi;
+               fi.setWhere( in_path );
+               fi = in_path;
+          const auto& ext = fi.ext().tolower();
+          switch( ext.hash() ){
+
+            //------------------------------------------------------------------
+            // Platform specific file types.
+            //------------------------------------------------------------------
+
+            case ".fablet"_64:
+              inSources( Type::kPrefab ).push( fi );
+              break;
+            case ".eon"_64:
+              inSources( Type::kEon ).push( fi );
+              break;
+            case ".a"_64:
+              inSources( Type::kStaticlib ).push( fi );
+              break;
+
+            //------------------------------------------------------------------
+            // Source and header file types.
+            //------------------------------------------------------------------
+
+            case ".inl"_64:/**/{
+              auto& inl = inSources( Type::kInl );
+              if( ! inl.find( fi )){
+                inl.push( fi );
+              }
+              break;
+            }
+            case ".hpp"_64:
+            case ".hxx"_64:
+            case ".hh"_64:/**/{
+              auto& hpp = inSources( Type::kHpp );
+              if( ! hpp.find( fi )){
+                hpp.push( fi );
+              }
+              break;
+            }
+            case ".cpp"_64:
+            case ".cxx"_64:
+            case ".cc"_64:/**/{
+              auto& cpp = inSources( Type::kCpp );
+              if( ! cpp.find( fi )){
+                cpp.push( fi );
+              }
+              break;
+            }
+            case ".h"_64:/**/{
+              auto& h = inSources( Type::kH );
+              if( ! h.find( fi )){
+                h.push( fi );
+              }
+              break;
+            }
+            case ".c"_64:/**/{
+              auto& c = inSources( Type::kC );
+              if( ! c.find( fi )){
+                c.push( fi );
+              }
+              break;
+            }
+            default:
+              return false;
+          }
+          return true;
         }
-      }
 
-    //}:                                          |
-    //sortingHat:{                                |
-
-      bool Workspace::Ninja::sortingHat( const string& in_path ){
-
-        //----------------------------------------------------------------------
-        // Gather together all the sources and store them off. Ignore them at
-        // the end of the function.
-        //----------------------------------------------------------------------
-
-        File fi;
-             fi.setWhere( in_path );
-             fi = in_path;
-        const auto& ext = fi.ext().tolower();
-        switch( ext.hash() ){
-
-          //--------------------------------------------------------------------
-          // Platform specific file types.
-          //--------------------------------------------------------------------
-
-          case ".fablet"_64:
-            inSources( Type::kPrefab ).push( fi );
-            break;
-          case ".eon"_64:
-            inSources( Type::kEon ).push( fi );
-            break;
-          case ".a"_64:
-            inSources( Type::kStaticlib ).push( fi );
-            break;
-
-          //--------------------------------------------------------------------
-          // Source and header file types.
-          //--------------------------------------------------------------------
-
-          case ".inl"_64:/**/{
-            auto& inl = inSources( Type::kInl );
-            if( ! inl.find( fi )){
-              inl.push( fi );
-            }
-            break;
-          }
-          case ".hpp"_64:
-          case ".hxx"_64:
-          case ".hh"_64:/**/{
-            auto& hpp = inSources( Type::kHpp );
-            if( ! hpp.find( fi )){
-              hpp.push( fi );
-            }
-            break;
-          }
-          case ".cpp"_64:
-          case ".cxx"_64:
-          case ".cc"_64:/**/{
-            auto& cpp = inSources( Type::kCpp );
-            if( ! cpp.find( fi )){
-              cpp.push( fi );
-            }
-            break;
-          }
-          case ".h"_64:/**/{
-            auto& h = inSources( Type::kH );
-            if( ! h.find( fi )){
-              h.push( fi );
-            }
-            break;
-          }
-          case ".c"_64:/**/{
-            auto& c = inSources( Type::kC );
-            if( ! c.find( fi )){
-              c.push( fi );
-            }
-            break;
-          }
-          default:
-            return false;
-        }
-        return true;
-      }
-
+      //}:                                        |
     //}:                                          |
     //serializeCrossPlatformTarget:{              |
 

@@ -8,8 +8,8 @@ wsp = workspace:new'precog'
 -- Build options.
 --------------------------------------------------------------------------------
 
-local BOOST_DIRECTORY = 'usr/share/boost/1.84.0'
-local EON_DIRECTORY   = 'src/core/include'
+local BOOST_DIRECTORY = 'usr/share/boost/1.84.0/'
+local EON_DIRECTORY   = 'src/core/include/'
 
 --------------------------------------------------------------------------------
 -- Create a new wsp under workspace to compile startup code.
@@ -79,9 +79,9 @@ wsp:new'pal'
 wsp:new'precog'
   : defines( '_DEBUG=1, DEBUG=1','NDEBUG=1' )
   : set_include_paths( BOOST_DIRECTORY..[[,
-    src/console/precog/include,
-    src/core/include,
-    src/lua/5.4.4]]
+    src/console/precog/include/,
+    src/core/include/,
+    src/lua/5.4.4/]]
   ..EON_DIRECTORY )
   : find_sources'src/console/precog/src,src/console/precog/include'
   -- Specify frameworks with no decoration and static libraries from other
