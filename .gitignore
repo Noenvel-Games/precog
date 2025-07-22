@@ -1,6 +1,8 @@
 xc/Build
 ninja.x64/.intermediate
 ninja.x64/.output
+ninja.aarch64/.intermediate
+ninja.aarch64/.output
 ninja.arm64/.intermediate
 ninja.arm64/.output
 vs/.intermediate
