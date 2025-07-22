@@ -341,7 +341,7 @@ using namespace fs;
         const auto clabel = toLabel().toupper() + "_CFLAGS";
         const auto cstart = clabel + " = ";
         string cflags = cstart;
-               cflags << " -I/usr/include";
+               cflags << " -w -I/usr/include";
         if( bmp->bWasm )
           if( e_getCvar( bool, "ENABLE_PTHREADS" ))
                cflags << " -O3 -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 -s PROXY_TO_PTHREAD";
