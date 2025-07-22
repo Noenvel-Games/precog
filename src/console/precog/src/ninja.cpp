@@ -430,7 +430,9 @@ using namespace fs;
 
             case "c++2b"_64:
               cxx << " -Wc++2b-extensions";
-              cxx << " -stdlib=libstdc++";
+              if( bmp->bLinux )
+                   cxx << " -stdlib=libstdc++";
+              else cxx << " -stdlib=libc++";
               cxx << " -std=c++2b";
               cxx << " -w";
               break;
@@ -440,7 +442,9 @@ using namespace fs;
               [[fallthrough]];
             case "cxx23"_64:
               cxx << " -Wc++23-extensions";
-              cxx << " -stdlib=libstdc++";
+              if( bmp->bLinux )
+                   cxx << " -stdlib=libstdc++";
+              else cxx << " -stdlib=libc++";
               cxx << " -std=c++23";
               cxx << " -w";
               break;
@@ -455,7 +459,9 @@ using namespace fs;
               [[fallthrough]];
             case "cxx20"_64:
               cxx << "-Wc++20-extensions";
-              cxx << " -stdlib=libstdc++";
+              if( bmp->bLinux )
+                   cxx << " -stdlib=libstdc++";
+              else cxx << " -stdlib=libc++";
               cxx << " -std=c++20";
               cxx << " -w";
               break;
@@ -469,7 +475,9 @@ using namespace fs;
             case "cpp17"_64:
               [[fallthrough]];
             case "cxx17"_64:
-              cxx << " -stdlib=libstdc++";
+              if( bmp->bLinux )
+                   cxx << " -stdlib=libstdc++";
+              else cxx << " -stdlib=libc++";
               cxx << " -std=c++17";
               cxx << " -w";
               break;

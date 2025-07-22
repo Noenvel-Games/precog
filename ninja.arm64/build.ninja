@@ -7,12 +7,210 @@
 
 ninja_required_version = 1.11.1
 
+include gfc.rules
+include startup.rules
 include lua.rules
 include pal.rules
 include lz4.rules
-include startup.rules
 include precog.rules
-include gfc.rules
+
+#-------------------------------------------------------------------------------
+# Project "gfc"
+#-------------------------------------------------------------------------------
+
+build .intermediate/gfc/boot.cpp.o: CXX_GFC ../src/core/src/boot.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/mutex.cpp.o: CXX_GFC ../src/core/src/mutex.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/thread.cpp.o: CXX_GFC ../src/core/src/thread.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/sha1.cpp.o: CXX_GFC ../src/core/src/sha1.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/atomic.cpp.o: CXX_GFC ../src/core/src/atomic.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/stdafx.cpp.o: CXX_GFC ../src/core/src/stdafx.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/mem.cpp.o: CXX_GFC ../src/core/src/mem.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/i32.cpp.o: CXX_GFC ../src/core/src/gfc/i32.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/serialize.cpp.o: CXX_GFC ../src/core/src/gfc/serialize.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/resource.cpp.o: CXX_GFC ../src/core/src/gfc/resource.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/f64.cpp.o: CXX_GFC ../src/core/src/gfc/f64.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/strings.cpp.o: CXX_GFC ../src/core/src/gfc/strings.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/f16.cpp.o: CXX_GFC ../src/core/src/gfc/f16.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/object.cpp.o: CXX_GFC ../src/core/src/gfc/object.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/timer.cpp.o: CXX_GFC ../src/core/src/gfc/timer.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/history.cpp.o: CXX_GFC ../src/core/src/gfc/history.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/buffer.cpp.o: CXX_GFC ../src/core/src/gfc/buffer.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/scratch.cpp.o: CXX_GFC ../src/core/src/gfc/scratch.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/i64.cpp.o: CXX_GFC ../src/core/src/gfc/i64.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/i8.cpp.o: CXX_GFC ../src/core/src/gfc/i8.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/fs.cpp.o: CXX_GFC ../src/core/src/gfc/fs.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/prefab.cpp.o: CXX_GFC ../src/core/src/gfc/prefab.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/f32.cpp.o: CXX_GFC ../src/core/src/gfc/f32.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/class.cpp.o: CXX_GFC ../src/core/src/gfc/class.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/half.cpp.o: CXX_GFC ../src/core/src/gfc/base/half.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/i16.cpp.o: CXX_GFC ../src/core/src/gfc/i16.cpp
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .intermediate/gfc/murmur3.c.o: C_GFC ../src/core/src/gfc/base/murmur3.c
+  OBJECT_DIR = .intermediate/gfc
+  OBJECT_FILE_DIR = .intermediate/gfc
+  TARGET_COMPILE_PDB = .intermediate/gfc
+  TARGET_PDB = .intermediate/gfc.pdb
+
+build .output/libgfc.a: STATIC_LIB_GFC .intermediate/gfc/boot.cpp.o .intermediate/gfc/mutex.cpp.o .intermediate/gfc/thread.cpp.o .intermediate/gfc/sha1.cpp.o .intermediate/gfc/atomic.cpp.o .intermediate/gfc/stdafx.cpp.o .intermediate/gfc/mem.cpp.o .intermediate/gfc/i32.cpp.o .intermediate/gfc/serialize.cpp.o .intermediate/gfc/resource.cpp.o .intermediate/gfc/f64.cpp.o .intermediate/gfc/strings.cpp.o .intermediate/gfc/f16.cpp.o .intermediate/gfc/object.cpp.o .intermediate/gfc/timer.cpp.o .intermediate/gfc/history.cpp.o .intermediate/gfc/buffer.cpp.o .intermediate/gfc/scratch.cpp.o .intermediate/gfc/i64.cpp.o .intermediate/gfc/i8.cpp.o .intermediate/gfc/fs.cpp.o .intermediate/gfc/prefab.cpp.o .intermediate/gfc/f32.cpp.o .intermediate/gfc/class.cpp.o .intermediate/gfc/half.cpp.o .intermediate/gfc/i16.cpp.o .intermediate/gfc/murmur3.c.o
+  OBJECT_DIR = .output
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = .output/libgfc.a
+  TARGET_PDB = gfc.a.dbg
+default .output/libgfc.a
+
+#-------------------------------------------------------------------------------
+# Project "startup"
+#-------------------------------------------------------------------------------
+
+build .intermediate/startup/entry.cpp.o: CXX_STARTUP ../src/bootseq/start/src/entry.cpp
+  OBJECT_DIR = .intermediate/startup
+  OBJECT_FILE_DIR = .intermediate/startup
+  TARGET_COMPILE_PDB = .intermediate/startup
+  TARGET_PDB = .intermediate/startup.pdb
+
+build .intermediate/startup/stdafx.cpp.o: CXX_STARTUP ../src/bootseq/start/src/stdafx.cpp
+  OBJECT_DIR = .intermediate/startup
+  OBJECT_FILE_DIR = .intermediate/startup
+  TARGET_COMPILE_PDB = .intermediate/startup
+  TARGET_PDB = .intermediate/startup.pdb
+
+build .output/libstartup.a: STATIC_LIB_STARTUP .intermediate/startup/entry.cpp.o .intermediate/startup/stdafx.cpp.o
+  OBJECT_DIR = .output
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = .output/libstartup.a
+  TARGET_PDB = startup.a.dbg
+default .output/libstartup.a
 
 #-------------------------------------------------------------------------------
 # Project "lua"
@@ -291,30 +489,6 @@ build .output/liblz4.a: STATIC_LIB_LZ4 .intermediate/lz4/lz4hc.c.o .intermediate
 default .output/liblz4.a
 
 #-------------------------------------------------------------------------------
-# Project "startup"
-#-------------------------------------------------------------------------------
-
-build .intermediate/startup/entry.cpp.o: CXX_STARTUP ../src/bootseq/start/src/entry.cpp
-  OBJECT_DIR = .intermediate/startup
-  OBJECT_FILE_DIR = .intermediate/startup
-  TARGET_COMPILE_PDB = .intermediate/startup
-  TARGET_PDB = .intermediate/startup.pdb
-
-build .intermediate/startup/stdafx.cpp.o: CXX_STARTUP ../src/bootseq/start/src/stdafx.cpp
-  OBJECT_DIR = .intermediate/startup
-  OBJECT_FILE_DIR = .intermediate/startup
-  TARGET_COMPILE_PDB = .intermediate/startup
-  TARGET_PDB = .intermediate/startup.pdb
-
-build .output/libstartup.a: STATIC_LIB_STARTUP .intermediate/startup/entry.cpp.o .intermediate/startup/stdafx.cpp.o
-  OBJECT_DIR = .output
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = .output/libstartup.a
-  TARGET_PDB = startup.a.dbg
-default .output/libstartup.a
-
-#-------------------------------------------------------------------------------
 # Project "precog"
 #-------------------------------------------------------------------------------
 
@@ -377,180 +551,6 @@ build .intermediate/precog/main.cpp.o: CXX_PRECOG ../src/console/precog/src/main
   OBJECT_FILE_DIR = .intermediate/precog
   TARGET_COMPILE_PDB = .intermediate/precog
   TARGET_PDB = .intermediate/precog.pdb
-
-#-------------------------------------------------------------------------------
-# Project "gfc"
-#-------------------------------------------------------------------------------
-
-build .intermediate/gfc/boot.cpp.o: CXX_GFC ../src/core/src/boot.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/mutex.cpp.o: CXX_GFC ../src/core/src/mutex.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/thread.cpp.o: CXX_GFC ../src/core/src/thread.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/sha1.cpp.o: CXX_GFC ../src/core/src/sha1.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/atomic.cpp.o: CXX_GFC ../src/core/src/atomic.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/stdafx.cpp.o: CXX_GFC ../src/core/src/stdafx.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/mem.cpp.o: CXX_GFC ../src/core/src/mem.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/i32.cpp.o: CXX_GFC ../src/core/src/gfc/i32.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/serialize.cpp.o: CXX_GFC ../src/core/src/gfc/serialize.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/resource.cpp.o: CXX_GFC ../src/core/src/gfc/resource.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/f64.cpp.o: CXX_GFC ../src/core/src/gfc/f64.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/strings.cpp.o: CXX_GFC ../src/core/src/gfc/strings.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/f16.cpp.o: CXX_GFC ../src/core/src/gfc/f16.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/object.cpp.o: CXX_GFC ../src/core/src/gfc/object.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/timer.cpp.o: CXX_GFC ../src/core/src/gfc/timer.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/history.cpp.o: CXX_GFC ../src/core/src/gfc/history.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/buffer.cpp.o: CXX_GFC ../src/core/src/gfc/buffer.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/scratch.cpp.o: CXX_GFC ../src/core/src/gfc/scratch.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/i64.cpp.o: CXX_GFC ../src/core/src/gfc/i64.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/i8.cpp.o: CXX_GFC ../src/core/src/gfc/i8.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/fs.cpp.o: CXX_GFC ../src/core/src/gfc/fs.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/prefab.cpp.o: CXX_GFC ../src/core/src/gfc/prefab.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/f32.cpp.o: CXX_GFC ../src/core/src/gfc/f32.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/class.cpp.o: CXX_GFC ../src/core/src/gfc/class.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/half.cpp.o: CXX_GFC ../src/core/src/gfc/base/half.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/i16.cpp.o: CXX_GFC ../src/core/src/gfc/i16.cpp
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .intermediate/gfc/murmur3.c.o: C_GFC ../src/core/src/gfc/base/murmur3.c
-  OBJECT_DIR = .intermediate/gfc
-  OBJECT_FILE_DIR = .intermediate/gfc
-  TARGET_COMPILE_PDB = .intermediate/gfc
-  TARGET_PDB = .intermediate/gfc.pdb
-
-build .output/libgfc.a: STATIC_LIB_GFC .intermediate/gfc/boot.cpp.o .intermediate/gfc/mutex.cpp.o .intermediate/gfc/thread.cpp.o .intermediate/gfc/sha1.cpp.o .intermediate/gfc/atomic.cpp.o .intermediate/gfc/stdafx.cpp.o .intermediate/gfc/mem.cpp.o .intermediate/gfc/i32.cpp.o .intermediate/gfc/serialize.cpp.o .intermediate/gfc/resource.cpp.o .intermediate/gfc/f64.cpp.o .intermediate/gfc/strings.cpp.o .intermediate/gfc/f16.cpp.o .intermediate/gfc/object.cpp.o .intermediate/gfc/timer.cpp.o .intermediate/gfc/history.cpp.o .intermediate/gfc/buffer.cpp.o .intermediate/gfc/scratch.cpp.o .intermediate/gfc/i64.cpp.o .intermediate/gfc/i8.cpp.o .intermediate/gfc/fs.cpp.o .intermediate/gfc/prefab.cpp.o .intermediate/gfc/f32.cpp.o .intermediate/gfc/class.cpp.o .intermediate/gfc/half.cpp.o .intermediate/gfc/i16.cpp.o .intermediate/gfc/murmur3.c.o
-  OBJECT_DIR = .output
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = .output/libgfc.a
-  TARGET_PDB = gfc.a.dbg
-default .output/libgfc.a
 
 #-------------------------------------------------------------------------------
 # Applications
