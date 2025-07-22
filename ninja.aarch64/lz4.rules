@@ -1,11 +1,11 @@
-LZ4_CFLAGS = -I/usr/include -O3 -I../src/lz4/include -DNDEBUG=1
+LZ4_CFLAGS =  -I/usr/include -O3 -libc -I../src/lz4/include -DNDEBUG=1
 
 rule CXX_LZ4
   command = /usr/bin/clang++ $CXX_FLAGS $LZ4_CFLAGS -Wc++20-extensions -stdlib=libc++ -std=c++20 -I/usr/include/aarch64-linux-gnu/c++/12 -I/usr/include/aarch64-linux-gnu -I/usr/include/c++/12 -lstdc++ -o $out -c $in
   description = Building C++ object $out
 
 rule C_LZ4
-  command = clang $LZ4_CFLAGS -o $out -c $in
+  command = gcc $LZ4_CFLAGS -o $out -c $in
   description = Building C object $out
 
 rule STATIC_LIB_LZ4
