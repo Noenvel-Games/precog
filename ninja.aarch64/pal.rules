@@ -1,11 +1,11 @@
-PAL_CFLAGS = -w -I/usr/include -O3 -I../usr/share/boost/1.84.0/ -I../src/core/include/ -DNDEBUG=1 -include ../src/core/include/eon/eon.h
+PAL_CFLAGS =  -I/usr/include -O3 -I../usr/share/boost/1.84.0/ -I../src/core/include/ -DNDEBUG=1 -include ../src/core/include/eon/eon.h -target arm64-linux-elf
 
 rule CXX_PAL
-  command = /usr/bin/clang++ $CXX_FLAGS $PAL_CFLAGS -Wc++20-extensions -stdlib=libstdc++ -std=c++20 -I/usr/include/aarch64-linux-gnu/c++/12 -I/usr/include/aarch64-linux-gnu -I/usr/include/c++/12 -lstdc++ -o $out -c $in
+  command = /usr/bin/clang++ $CXX_FLAGS $PAL_CFLAGS -Wc++20-extensions -stdlib=libstdc++ -std=c++20 -w -I/usr/include/aarch64-linux-gnu/c++/12 -I/usr/include/aarch64-linux-gnu -I/usr/include/c++/12 -lstdc++ -o $out -c $in
   description = Building C++ object $out
 
 rule C_PAL
-  command = gcc $PAL_CFLAGS -o $out -c $in
+  command = clang $PAL_CFLAGS -o $out -c $in
   description = Building C object $out
 
 rule STATIC_LIB_PAL

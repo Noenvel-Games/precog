@@ -8,10 +8,10 @@
 ninja_required_version = 1.11.1
 
 include gfc.rules
-include pal.rules
-include precog.rules
 include lz4.rules
+include pal.rules
 include startup.rules
+include precog.rules
 include lua.rules
 
 #-------------------------------------------------------------------------------
@@ -189,6 +189,42 @@ build .output/libgfc.a: STATIC_LIB_GFC .intermediate/gfc/stdafx.cpp.o .intermedi
 default .output/libgfc.a
 
 #-------------------------------------------------------------------------------
+# Project "lz4"
+#-------------------------------------------------------------------------------
+
+build .intermediate/lz4/lz4.c.o: C_LZ4 ../src/lz4/src/lz4.c
+  OBJECT_DIR = .intermediate/lz4
+  OBJECT_FILE_DIR = .intermediate/lz4
+  TARGET_COMPILE_PDB = .intermediate/lz4
+  TARGET_PDB = .intermediate/lz4.pdb
+
+build .intermediate/lz4/lz4hc.c.o: C_LZ4 ../src/lz4/src/lz4hc.c
+  OBJECT_DIR = .intermediate/lz4
+  OBJECT_FILE_DIR = .intermediate/lz4
+  TARGET_COMPILE_PDB = .intermediate/lz4
+  TARGET_PDB = .intermediate/lz4.pdb
+
+build .intermediate/lz4/lz4frame.c.o: C_LZ4 ../src/lz4/src/lz4frame.c
+  OBJECT_DIR = .intermediate/lz4
+  OBJECT_FILE_DIR = .intermediate/lz4
+  TARGET_COMPILE_PDB = .intermediate/lz4
+  TARGET_PDB = .intermediate/lz4.pdb
+
+build .intermediate/lz4/xxhash.c.o: C_LZ4 ../src/lz4/src/xxhash.c
+  OBJECT_DIR = .intermediate/lz4
+  OBJECT_FILE_DIR = .intermediate/lz4
+  TARGET_COMPILE_PDB = .intermediate/lz4
+  TARGET_PDB = .intermediate/lz4.pdb
+
+build .output/liblz4.a: STATIC_LIB_LZ4 .intermediate/lz4/lz4.c.o .intermediate/lz4/lz4hc.c.o .intermediate/lz4/lz4frame.c.o .intermediate/lz4/xxhash.c.o
+  OBJECT_DIR = .output
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = .output/liblz4.a
+  TARGET_PDB = lz4.a.dbg
+default .output/liblz4.a
+
+#-------------------------------------------------------------------------------
 # Project "pal"
 #-------------------------------------------------------------------------------
 
@@ -223,6 +259,30 @@ build .output/libpal.a: STATIC_LIB_PAL .intermediate/pal/detect.cpp.o .intermedi
   TARGET_FILE = .output/libpal.a
   TARGET_PDB = pal.a.dbg
 default .output/libpal.a
+
+#-------------------------------------------------------------------------------
+# Project "startup"
+#-------------------------------------------------------------------------------
+
+build .intermediate/startup/stdafx.cpp.o: CXX_STARTUP ../src/bootseq/start/src/stdafx.cpp
+  OBJECT_DIR = .intermediate/startup
+  OBJECT_FILE_DIR = .intermediate/startup
+  TARGET_COMPILE_PDB = .intermediate/startup
+  TARGET_PDB = .intermediate/startup.pdb
+
+build .intermediate/startup/entry.cpp.o: CXX_STARTUP ../src/bootseq/start/src/entry.cpp
+  OBJECT_DIR = .intermediate/startup
+  OBJECT_FILE_DIR = .intermediate/startup
+  TARGET_COMPILE_PDB = .intermediate/startup
+  TARGET_PDB = .intermediate/startup.pdb
+
+build .output/libstartup.a: STATIC_LIB_STARTUP .intermediate/startup/stdafx.cpp.o .intermediate/startup/entry.cpp.o
+  OBJECT_DIR = .output
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = .output/libstartup.a
+  TARGET_PDB = startup.a.dbg
+default .output/libstartup.a
 
 #-------------------------------------------------------------------------------
 # Project "precog"
@@ -287,66 +347,6 @@ build .intermediate/precog/xcode.cpp.o: CXX_PRECOG ../src/console/precog/src/xco
   OBJECT_FILE_DIR = .intermediate/precog
   TARGET_COMPILE_PDB = .intermediate/precog
   TARGET_PDB = .intermediate/precog.pdb
-
-#-------------------------------------------------------------------------------
-# Project "lz4"
-#-------------------------------------------------------------------------------
-
-build .intermediate/lz4/lz4.c.o: C_LZ4 ../src/lz4/src/lz4.c
-  OBJECT_DIR = .intermediate/lz4
-  OBJECT_FILE_DIR = .intermediate/lz4
-  TARGET_COMPILE_PDB = .intermediate/lz4
-  TARGET_PDB = .intermediate/lz4.pdb
-
-build .intermediate/lz4/lz4hc.c.o: C_LZ4 ../src/lz4/src/lz4hc.c
-  OBJECT_DIR = .intermediate/lz4
-  OBJECT_FILE_DIR = .intermediate/lz4
-  TARGET_COMPILE_PDB = .intermediate/lz4
-  TARGET_PDB = .intermediate/lz4.pdb
-
-build .intermediate/lz4/lz4frame.c.o: C_LZ4 ../src/lz4/src/lz4frame.c
-  OBJECT_DIR = .intermediate/lz4
-  OBJECT_FILE_DIR = .intermediate/lz4
-  TARGET_COMPILE_PDB = .intermediate/lz4
-  TARGET_PDB = .intermediate/lz4.pdb
-
-build .intermediate/lz4/xxhash.c.o: C_LZ4 ../src/lz4/src/xxhash.c
-  OBJECT_DIR = .intermediate/lz4
-  OBJECT_FILE_DIR = .intermediate/lz4
-  TARGET_COMPILE_PDB = .intermediate/lz4
-  TARGET_PDB = .intermediate/lz4.pdb
-
-build .output/liblz4.a: STATIC_LIB_LZ4 .intermediate/lz4/lz4.c.o .intermediate/lz4/lz4hc.c.o .intermediate/lz4/lz4frame.c.o .intermediate/lz4/xxhash.c.o
-  OBJECT_DIR = .output
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = .output/liblz4.a
-  TARGET_PDB = lz4.a.dbg
-default .output/liblz4.a
-
-#-------------------------------------------------------------------------------
-# Project "startup"
-#-------------------------------------------------------------------------------
-
-build .intermediate/startup/stdafx.cpp.o: CXX_STARTUP ../src/bootseq/start/src/stdafx.cpp
-  OBJECT_DIR = .intermediate/startup
-  OBJECT_FILE_DIR = .intermediate/startup
-  TARGET_COMPILE_PDB = .intermediate/startup
-  TARGET_PDB = .intermediate/startup.pdb
-
-build .intermediate/startup/entry.cpp.o: CXX_STARTUP ../src/bootseq/start/src/entry.cpp
-  OBJECT_DIR = .intermediate/startup
-  OBJECT_FILE_DIR = .intermediate/startup
-  TARGET_COMPILE_PDB = .intermediate/startup
-  TARGET_PDB = .intermediate/startup.pdb
-
-build .output/libstartup.a: STATIC_LIB_STARTUP .intermediate/startup/stdafx.cpp.o .intermediate/startup/entry.cpp.o
-  OBJECT_DIR = .output
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = .output/libstartup.a
-  TARGET_PDB = startup.a.dbg
-default .output/libstartup.a
 
 #-------------------------------------------------------------------------------
 # Project "lua"
