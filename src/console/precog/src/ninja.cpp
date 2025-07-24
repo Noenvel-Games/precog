@@ -341,7 +341,7 @@ using namespace fs;
         const auto clabel = toLabel().toupper() + "_CFLAGS";
         const auto cstart = clabel + " = ";
         string cflags = cstart;
-               cflags << " -w -I/usr/include";
+               cflags << "-w -I/usr/include";
         if( bmp->bWasm )
           if( e_getCvar( bool, "ENABLE_PTHREADS" ))
                cflags << " -O3 -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 -s PROXY_TO_PTHREAD";
@@ -418,9 +418,7 @@ using namespace fs;
               e_break( " * Emscripten not found at ~/emsdk." );
               return;
             }
-          }else if( !bmp->bCrostini )
-               cxx << "/usr/bin/clang++";
-          else cxx << "/usr/bin/g++";
+          }else cxx << "/usr/bin/clang++";
           cxx << " $CXX_FLAGS $" << clabel << " ";
           switch( toLanguage().hash() ){
 
@@ -564,11 +562,7 @@ using namespace fs;
               e_break( "Emscripten not found at ~/emsdk." );
               return;
             }
-          }else{
-            if( bmp->bCrostini )
-                 c <<   "gcc $" << clabel << " -o $out -c $in\n";
-            else c << "clang $" << clabel << " -o $out -c $in\n";
-          }
+          }else c << "clang $" << clabel << " -o $out -c $in\n";
         }
 
         //----------------------------------------------------------------------
@@ -657,12 +651,8 @@ using namespace fs;
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm )// TODO: Search on path first and use dexists.
               fs << "~/emsdk/upstream/emscripten/emcc --shared ";
-            else if( !bmp->bCrostini ){
+            else{
               fs << "clang++ --shared ";
-              if( lstart != lflags )
-                fs << lflags << " ";
-            }else{// TODO: g++ and clang differ in command line args.
-              fs << "g++ --shared ";
               if( lstart != lflags ){
                 fs << lflags << " ";
               }
@@ -693,9 +683,7 @@ using namespace fs;
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm )// TODO: Check different locations with e_fexists.
                  fs << "~/emsdk/upstream/emscripten/emcc";
-            else if( !bmp->bCrostini )
-                 fs << "clang++";// NB: preserve order.
-            else fs << "g++";
+            else fs << "clang++";// NB: preserve order.
             if( lstart != lflags )
               fs << " $" << llabel;
             if( bmp->bWasm ){
