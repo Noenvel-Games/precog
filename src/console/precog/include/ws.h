@@ -640,6 +640,26 @@
 
             virtual~Ninja() = default;
             Ninja() = default;
+
+          private:
+
+            e_forceinline const string& getCCp()const{
+              if(( false )){// TODO: Need to have the GCC path and the clang.
+                if( bmp->bGNU ){
+                  return"g++";
+                }
+              }
+              return"clang++";
+            }
+
+            e_forceinline const string& getCC()const{
+              if(( false )){// TODO: Need to have the GCC path and the clang.
+                if( bmp->bGNU ){
+                  return"gcc";
+                }
+              }
+              return"clang";
+            }
           };
 
           //--------------------------------------------------------------------
@@ -786,6 +806,7 @@
           , bCmake:1
           , bUnity:1
           , bNDK:1
+          , bGNU:1
           // Special platform hints.
           , osIphone:1
           , osIpad:1

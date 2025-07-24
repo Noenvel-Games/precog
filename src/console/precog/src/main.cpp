@@ -608,7 +608,9 @@ using namespace fs;
             , major
             , minor
             , rev );
-        if( patch ) title.catf( " patch %u.%u", patch, build );
+        if( patch )
+          title.catf( " patch %u.%u", patch, build );
+        title << " (alpha)";
         if( args.size() == 1u )
           title << "\n  -? helps";
         e_msg( title );
@@ -794,20 +796,20 @@ using namespace fs;
                 }
 
                 //--------------------------------------------------------------
+                // Enable GCC/G++ for compiling with.
+                //--------------------------------------------------------------
+
+                if( it->tolower().hash() == "--gnu"_64 ){
+                  Workspace::bmp->bGNU = 1;
+                  continue;
+                }
+
+                //--------------------------------------------------------------
                 // Enable unity builds.
                 //--------------------------------------------------------------
 
                 if( it->tolower().hash() == "--unity"_64 ){
                   Workspace::bmp->bUnity = 1;
-                  continue;
-                }
-
-                //--------------------------------------------------------------
-                // Delete tmp directory.
-                //--------------------------------------------------------------
-
-                if( it->tolower().hash() == "--clean"_64 ){
-                  IEngine::rm( Workspace::out );
                   continue;
                 }
 
@@ -916,14 +918,10 @@ using namespace fs;
                   e_msg( "        env    : eabi gnu android macho elf, etc." );
                   e_msg( "      --{macho|elf|pe}" );
                   e_msg( "      --{sse|neon}" );
-                  #if e_compiling( experimental )
-                    e_msg( "    Imports:" );
-                    e_msg( "      {--import=|-i}<file[.text|.lua|.py]>" );
-                  #endif
                   e_msg( "    Globals:" );
                   e_msg( "      --c{++|pp|xx}{23|20|17|14|11}" );
                   e_msg( "      --unity" );
-                  e_msg( "      --clean" );
+//                e_msg( "      --gnu  # Use G++/GCC to compile project." );
                   e_msg( "      -opath # Write projects to 'path' dir+file" );
                   e_msg( "    Options:" );
                   e_msg( "      when \"xcode\"" );
@@ -931,8 +929,6 @@ using namespace fs;
                   e_msg( "        --xcode-v12" );
                   e_msg( "        --xcode-v11" );
                   e_msg( "        -v or --verbose-pbx/--pbx # Add to PBX comments." );
-                  e_msg( "      when \"vs2022[=v143]\"" );
-                  e_msg( "        --maxplugin=ext" );
                   e_msg( "      when \"ninja\"" );
                   e_msg( "      when \"emscripten\" \\__ Web Assembly" );
                   e_msg( "      when \"wasm\"       /" );

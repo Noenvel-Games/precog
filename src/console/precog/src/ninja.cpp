@@ -108,6 +108,20 @@ using namespace fs;
 
       //}:                                        |
     //}:                                          |
+    //extFromEnum<>:{                             |
+
+      ccp Workspace::Ninja::extFromEnum( const Type e )const{
+        switch( e ){
+          case decltype( e )::kCpp:
+            return".cpp";
+          case decltype( e )::kC:
+            return".c";
+          default:
+            return"";
+        }
+      }
+
+    //}:                                          |
     //serializeCrossPlatformTarget:{              |
 
       void Workspace::Ninja::serializeCrossPlatformTarget( string& cxx )const{
@@ -262,20 +276,6 @@ using namespace fs;
       }
 
     //}:                                          |
-    //extFromSource<>:{                           |
-
-      ccp Workspace::Ninja::extFromEnum( const Type e )const{
-        switch( e ){
-          case decltype( e )::kCpp:
-            return".cpp";
-          case decltype( e )::kC:
-            return".c";
-          default:
-            return"";
-        }
-      }
-
-    //}:                                          |
     //serialize:{                                 |
 
       void Workspace::Ninja::serialize( Writer& fs )const{
@@ -418,7 +418,7 @@ using namespace fs;
               e_break( " * Emscripten not found at ~/emsdk." );
               return;
             }
-          }else cxx << "/usr/bin/clang++";
+          }else cxx << getCCp();
           cxx << " $CXX_FLAGS $" << clabel << " ";
           switch( toLanguage().hash() ){
 
@@ -562,7 +562,7 @@ using namespace fs;
               e_break( "Emscripten not found at ~/emsdk." );
               return;
             }
-          }else c << "clang $" << clabel << " -o $out -c $in\n";
+          }else c << getCC() << " $" << clabel << " -o $out -c $in\n";
         }
 
         //----------------------------------------------------------------------
@@ -652,7 +652,7 @@ using namespace fs;
             if( bmp->bWasm )// TODO: Search on path first and use dexists.
               fs << "~/emsdk/upstream/emscripten/emcc --shared ";
             else{
-              fs << "clang++ --shared ";
+              fs << getCCp() << " --shared ";
               if( lstart != lflags ){
                 fs << lflags << " ";
               }
@@ -683,7 +683,7 @@ using namespace fs;
             fs << "  command = $PRE_LINK && ";
             if( bmp->bWasm )// TODO: Check different locations with e_fexists.
                  fs << "~/emsdk/upstream/emscripten/emcc";
-            else fs << "clang++";// NB: preserve order.
+            else fs << getCCp();// NB: preserve order.
             if( lstart != lflags )
               fs << " $" << llabel;
             if( bmp->bWasm ){
