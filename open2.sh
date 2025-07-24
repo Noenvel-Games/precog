@@ -1,1 +1,1 @@
-vim ./src/console/precog/src/ninja.cpp ./src/console/precog/src/main.cpp
+gvim ./src/console/precog/src/ninja.cpp ./src/console/precog/src/main.cpp
